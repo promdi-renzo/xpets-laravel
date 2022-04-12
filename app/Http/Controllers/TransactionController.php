@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class TransactionController extends Controller
 {
@@ -66,17 +65,8 @@ class TransactionController extends Controller
 
             ->orderBy("transaction_line.transaction_id", "ASC")
             ->withTrashed()
-            ->paginate(6);
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+            ->paginate(100);
+
         return view("transaction.index", [
             "customers" => $customers,
         ]);

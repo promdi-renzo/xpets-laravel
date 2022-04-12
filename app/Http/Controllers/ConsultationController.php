@@ -9,7 +9,6 @@ use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ConsultationController extends Controller
 {
@@ -115,18 +114,7 @@ class ConsultationController extends Controller
             )
             ->orderBy("consultations.id", "ASC")
             ->withTrashed()
-            ->paginate(6);
-
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+            ->paginate(100);
 
         return view("consultations.index", ["consultations" => $consultations]);
     }
@@ -172,9 +160,7 @@ class ConsultationController extends Controller
             );
         }
         DB::commit();
-        return Redirect::to("/consultation")->withSuccessMessage(
-            "New Consultation Data Added!"
-        );
+        return Redirect::to("/consultation");
     }
 
     /**
@@ -240,9 +226,7 @@ class ConsultationController extends Controller
             );
         }
         DB::commit();
-        return Redirect::to("/consultation")->withSuccessMessage(
-            "New Consultation Data Updated!"
-        );
+        return Redirect::to("/consultation");
     }
 
     /**
@@ -254,9 +238,7 @@ class ConsultationController extends Controller
     public function destroy($id)
     {
         Consultation::destroy($id);
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Deleted!"
-        );
+        return Redirect::route("consultation.index");
     }
 
     public function restore($id)
@@ -264,16 +246,12 @@ class ConsultationController extends Controller
         Consultation::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Restored!"
-        );
+        return Redirect::route("consultation.index");
     }
 
     public function forceDelete($id)
     {
         Consultation::findOrFail($id)->forceDelete();
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Permanently Deleted!"
-        );
+        return Redirect::route("consultation.index");
     }
 }

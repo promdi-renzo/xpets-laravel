@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ServiceController extends Controller
 {
@@ -19,18 +18,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::withTrashed()->paginate(6);
-
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+        $services = Service::withTrashed()->paginate(100);
 
         return view("services.index", ["services" => $services]);
     }
@@ -64,9 +52,7 @@ class ServiceController extends Controller
             $services->images = $filename;
         }
         $services->save();
-        return Redirect::to("/service")->withSuccessMessage(
-            "New Service Added!"
-        );
+        return Redirect::to("/service");
     }
 
     /**
@@ -116,9 +102,7 @@ class ServiceController extends Controller
             $services->images = $filename;
         }
         $services->update();
-        return Redirect::to("/service")->withSuccessMessage(
-            "Service Data Updated!"
-        );
+        return Redirect::to("/service");
     }
 
     /**
@@ -130,9 +114,7 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         Service::destroy($id);
-        return Redirect::to("/service")->withSuccessMessage(
-            "Service Data Deleted!"
-        );
+        return Redirect::to("/service");
     }
 
     public function restore($id)
@@ -140,9 +122,7 @@ class ServiceController extends Controller
         Service::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("service.index")->withSuccessMessage(
-            "Service Data Restored!"
-        );
+        return Redirect::route("service.index");
     }
 
     public function forceDelete($id)
@@ -153,8 +133,6 @@ class ServiceController extends Controller
             File::delete($destination);
         }
         $Services->forceDelete();
-        return Redirect::route("service.index")->withSuccessMessage(
-            "Service Data Permanently Deleted!"
-        );
+        return Redirect::route("service.index");
     }
 }

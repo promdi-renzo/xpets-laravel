@@ -8,7 +8,6 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class PetController extends Controller
 {
@@ -38,18 +37,7 @@ class PetController extends Controller
             )
             ->orderBy("pets.id", "ASC")
             ->withTrashed()
-            ->paginate(6);
-
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+            ->paginate(100);
 
         return view("pets.index", ["pets" => $pets]);
     }
@@ -88,9 +76,7 @@ class PetController extends Controller
             $pets->images = $filename;
         }
         $pets->save();
-        return Redirect::to("/pets")->withSuccessMessage(
-            "New Animal Added!"
-        );
+        return Redirect::to("/pets");
     }
 
     /**
@@ -151,9 +137,7 @@ class PetController extends Controller
             $pets->images = $filename;
         }
         $pets->update();
-        return Redirect::to("/pets")->withSuccessMessage(
-            "Animal Data Updated!"
-        );
+        return Redirect::to("/pets");
     }
 
     /**
@@ -165,9 +149,7 @@ class PetController extends Controller
     public function destroy($id)
     {
         Animal::destroy($id);
-        return Redirect::to("/pets")->withSuccessMessage(
-            "Animal Data Deleted!"
-        );
+        return Redirect::to("/pets");
     }
 
     public function restore($id)
@@ -175,9 +157,7 @@ class PetController extends Controller
         Animal::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("pets.index")->withSuccessMessage(
-            "Animal Data Restored!"
-        );
+        return Redirect::route("pets.index");
     }
 
     public function forceDelete($id)
@@ -188,8 +168,6 @@ class PetController extends Controller
             File::delete($destination);
         }
         $pets->forceDelete();
-        return Redirect::route("pets.index")->withSuccessMessage(
-            "Animal Data Permanently Deleted!"
-        );
+        return Redirect::route("pets.index");
     }
 }

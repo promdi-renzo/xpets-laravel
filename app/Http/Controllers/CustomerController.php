@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
 {
@@ -122,7 +121,7 @@ class CustomerController extends Controller
             )
             ->orderBy("Customers.id", "ASC")
             ->withTrashed()
-            ->paginate(6);
+            ->paginate(100);
 
         return view("customers.index", ["customers" => $Customers]);
 
@@ -157,9 +156,7 @@ class CustomerController extends Controller
             $Customers->images = $filename;
         }
         $Customers->save();
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Added!"
-        );
+        return Redirect::to("customer");
     }
 
     /**
@@ -210,9 +207,7 @@ class CustomerController extends Controller
             $Customers->images = $filename;
         }
         $Customers->update();
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Updated!"
-        );
+        return Redirect::to("customer");
     }
 
     /**
@@ -224,9 +219,7 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         Customer::destroy($id);
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Deleted!"
-        );
+        return Redirect::to("customer");
     }
 
     public function restore($id)
@@ -234,9 +227,7 @@ class CustomerController extends Controller
         Customer::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("customer.index")->withSuccessMessage(
-            "New Customer Restored!"
-        );
+        return Redirect::route("customer.index");
     }
 
     public function forceDelete($id)
@@ -247,8 +238,6 @@ class CustomerController extends Controller
             File::delete($destination);
         }
         $Customers->forceDelete();
-        return Redirect::route("customer.index")->withSuccessMessage(
-            "New Customer Permanently Deleted!"
-        );
+        return Redirect::route("customer.index");
     }
 }

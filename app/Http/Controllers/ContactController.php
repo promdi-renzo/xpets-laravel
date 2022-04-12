@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactController extends Controller
 {
@@ -67,18 +66,7 @@ class ContactController extends Controller
             )
             ->orderBy("contacts.id", "ASC")
             ->withTrashed()
-            ->paginate(6);
-
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+            ->paginate(100);
 
         return view("contacts.index", [
             "contacts" => $contacts,
@@ -154,9 +142,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         Contact::destroy($id);
-        return Redirect::to("contact")->withSuccessMessage(
-            "Contact Data Deleted!"
-        );
+        return Redirect::to("contact");
     }
 
     public function restore($id)
@@ -164,17 +150,13 @@ class ContactController extends Controller
         Contact::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("contact.index")->withSuccessMessage(
-            "Contact Data Restored!"
-        );
+        return Redirect::route("contact.index");
     }
 
     public function forceDelete($id)
     {
         $contacts = Contact::findOrFail($id);
         $contacts->forceDelete();
-        return Redirect::route("contact.index")->withSuccessMessage(
-            "Contact Data Permanently Deleted!"
-        );
+        return Redirect::route("contact.index");
     }
 }

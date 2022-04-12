@@ -30,9 +30,7 @@ class PersonnelController extends Controller
 
         $personnels->save();
         Auth::login($personnels);
-        return redirect::route("personnels.dashboard")->withSuccessMessage(
-            "New Personnel Added!"
-        );
+        return redirect::route("personnels.dashboard");
     }
 
     public function Dashboard()
@@ -138,9 +136,7 @@ class PersonnelController extends Controller
         $personnels->password = Hash::make($request->input("password"));
         $personnels->role = $request->input("role");
         $personnels->update();
-        return Redirect::to("personnel")->withSuccessMessage(
-            "Personnel Data Updated!"
-        );
+        return Redirect::to("personnel");
     }
 
     /**
@@ -152,9 +148,7 @@ class PersonnelController extends Controller
     public function destroy($id)
     {
         Personnel::destroy($id);
-        return Redirect::to("personnel")->withSuccessMessage(
-            "Personnel Data Deleted!"
-        );
+        return Redirect::to("personnel");
     }
 
     public function restore($id)
@@ -162,17 +156,13 @@ class PersonnelController extends Controller
         Personnel::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("personnel.index")->withSuccessMessage(
-            "Personnel Data Restored!"
-        );
+        return Redirect::route("personnel.index");
     }
 
     public function forceDelete($id)
     {
         $personnels = Personnel::findOrFail($id);
         $personnels->forceDelete();
-        return Redirect::route("personnel.index")->withSuccessMessage(
-            "Personnel Data Permanently Deleted!"
-        );
+        return Redirect::route("personnel.index");
     }
 }
