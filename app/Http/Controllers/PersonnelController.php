@@ -10,20 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class PersonnelController extends Controller
 {
-    public function Email()
-    {
-        return view("personnels.email");
-    }
-
-    public function Reset()
-    {
-        return view("personnels.reset");
-    }
 
     public function getSignup()
     {
@@ -83,19 +72,7 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $personnels = Personnel::withTrashed()->paginate(6);
-        //$personnels = Personnel::all();
-
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+        $personnels = Personnel::withTrashed()->paginate(100);
 
         return view("personnels.index", [
             "personnels" => $personnels,
@@ -120,20 +97,6 @@ class PersonnelController extends Controller
      */
     public function store(PersonnelRequest $request)
     {
-        //  $personnels = new Personnel();
-        //  $personnels->full_name = $request->input("full_name");
-        //  $personnels->email = $request->input("email");
-        //  $personnels->password = Hash::make($request->input("password"));
-        //  $personnels->role = $request->input("role");
-        //  if ($request->hasfile("images")) {
-        //      $file = $request->file("images");
-        //      $extension = $file->getClientOriginalExtension();
-        //      $filename = time() . "." . $extension;
-        //      $file->move("uploads/personnels/", $filename);
-        //      $personnels->images = $filename;
-        //  }
-        //  $personnels->save();
-        //  return Redirect::to("login")->with("success", "New Personnel Added!");
     }
 
     /**

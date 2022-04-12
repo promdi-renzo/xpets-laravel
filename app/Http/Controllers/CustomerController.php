@@ -124,19 +124,8 @@ class CustomerController extends Controller
             ->withTrashed()
             ->paginate(6);
 
-        if (session(key:"success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key:"success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
-
         return view("customers.index", ["customers" => $Customers]);
-        //return view("Customers.index", compact("Customers"));
+
     }
 
     /**

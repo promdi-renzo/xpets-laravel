@@ -29,8 +29,4 @@ class Customer extends Model
 
     protected $fillable = ["first_name", "last_name", "phone_number", "images"];
 
-    //public function Animal()
-    //{
-    //  return $this->hasMany(Animal::class);
-    //}
 }

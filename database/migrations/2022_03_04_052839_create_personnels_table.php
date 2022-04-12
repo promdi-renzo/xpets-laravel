@@ -14,11 +14,10 @@ return new class extends Migration {
     {
         Schema::create("personnels", function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column: "full_name");
-            $table->string(column: "email");
-            $table->string(column: "password");
-            $table->string(column: "role");
-            //$table->string(column: "images");
+            $table->string(column:"full_name");
+            $table->string(column:"email");
+            $table->string(column:"password");
+            $table->string(column:"role");
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

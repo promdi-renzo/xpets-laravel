@@ -235,7 +235,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -246,7 +246,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -268,18 +268,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        // $transactions = Transaction::find($id);
-        // $transaction_line = Transaction_line::find($id);
-        // $personnels = Personnel::pluck("full_name", "id");
-        // $pets = Animal::pluck("animal_name", "id");
-        // $services = Service::pluck("service_name", "id");
-        // return view("transaction.edit", [
-        //     "transactions" => $transactions,
-        //     "transaction_line" => $transaction_line,
-        //     "personnels" => $personnels,
-        //     "pets" => $pets,
-        //     "services" => $services,
-        // ]);
+
     }
 
     /**
@@ -291,18 +280,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $transactions = Transaction::find($id);
-        // $transactions->date = $request->input("date");
-        // $transactions->personnel_id = $request->input("personnel_id");
-        // $transactions->update();
 
-        // $transaction_line = Transaction_line::find($id);
-        // $transaction_line->animal_id = $request->input("animal_id");
-        // $transaction_line->service_id = $request->input("service_id");
-        // $transaction_line->update();
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Updated!"
-        // );
     }
 
     /**
@@ -313,13 +291,6 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        // $post = Transaction::findOrFail($id);
-        // $postGroups = Transaction::where('id', $post->id)->get();
-        // DB::table('transaction_line')->whereIn('transaction_id', $postGroups->pluck('id'))->delete();
-        // Transaction::where('transaction_id', $post->id)->delete();
 
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Deleted!"
-        // );
     }
 }
