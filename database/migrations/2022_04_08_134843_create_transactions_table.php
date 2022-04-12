@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments("id");
             $table->string(column:"date");
-            $table->integer(column:"personnel_id")->unsigned();
+            $table->integer(column:"employee_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
-                ->foreign("personnel_id")
+                ->foreign("employee_id")
                 ->references("id")
-                ->on("personnels")
+                ->on("employees")
                 ->onDelete("cascade");
         });
         Schema::create('transaction_line', function (Blueprint $table) {

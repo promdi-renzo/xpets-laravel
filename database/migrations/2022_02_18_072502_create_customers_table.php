@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create("customers", function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column: "first_name");
-            $table->string(column: "last_name");
-            $table->string(column: "phone_number");
-            $table->string(column: "images");
+            $table->string(column:"full_name");
+            $table->string(column:"number");
+            $table->string(column:"pictures");
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string(column:"disease_injury");
             $table->integer(column:"price");
             $table->string(column:"comment");
-            $table->integer(column:"personnel_id")->unsigned();
+            $table->integer(column:"employee_id")->unsigned();
             $table->integer(column:"animal_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
-                ->foreign("personnel_id")
+                ->foreign("employee_id")
                 ->references("id")
-                ->on("personnels")
+                ->on("employees")
                 ->onDelete("cascade");
             $table
                 ->foreign("animal_id")

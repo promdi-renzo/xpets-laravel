@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create("pets", function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column:"animal_name");
-            $table->integer(column:"age");
-            $table->string(column:"gender");
-            $table->string(column:"type");
-            $table->string(column:"images");
+            $table->string(column:"pet_name");
+            $table->string(column:"sex");
+            $table->string(column:"classification");
+            $table->string(column:"pictures");
             $table->integer(column:"customer_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
