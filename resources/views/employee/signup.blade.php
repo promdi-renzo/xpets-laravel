@@ -7,7 +7,7 @@
         Sign Up
     </h1>
 
-    <form method="POST" action="{{ route('employeee.signup') }}">
+    <form method="POST" action="{{ route('employee.signup') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="row mb-3">
@@ -57,28 +57,13 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <label for="role" class="col-form-label">Pick Your Role</label>
-            <div class="col-md-6">
-                <select name="role" id="role" class="form-select" value="{{old('role')}}">
-                    <option>Employee</option>
-                    <option>Veterinarian</option>
-                    <option>Volunteer</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="captcha" class="col-form-label">Captcha</label>
-            <div class="pl-32 ml-12">
-                {!! NoCaptcha::renderJs() !!}
-                {!! NoCaptcha::display() !!}
-            </div>
-            <p class="col-md-6">
-                @if($errors->has('g-recaptcha-response'))
-            <p class="pl-48 ml-4 text-red-500 pt-3 font-bold">{{ $errors->first('g-recaptcha-response') }}</p>
+        <div>
+            <label for="pictures" class="text-lg">Picture</label>
+            <input type="file" class="block shadow-5xl p-2 w-full" id="pictures" name="pictures"
+                value="{{old('pictures')}}">
+            @if($errors->has('pictures'))
+            <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>
             @endif
-            </p>
         </div>
 
         <div class="row">

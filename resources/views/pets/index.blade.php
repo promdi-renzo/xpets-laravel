@@ -10,7 +10,7 @@
 
 <div class="py-3">
     <table class="border-collapse shadow">
-        <thead >
+        <thead>
             <tr class="text-gray-50 text-center">
                 <th class="w-screen text-3xl p-3">Id</th>
                 <th class="w-screen text-3xl p-3">Pet Name</th>
@@ -41,7 +41,7 @@
                 {{ $pet->full_name }}
             </td>
             <td class="pl-10">
-                <img src="{{ asset('pictures/pets/'.$pet->images)}}" alt="Picture" width="75" height="75">
+                <img src="{{ asset('pics/pets/'.$pet->pictures)}}" alt="Picture" width="75" height="75">
             </td>
             <td class=" text-center">
                 <a href="pets/{{ $pet->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
@@ -82,7 +82,7 @@
             </td>
         </tr>
         @empty
-            <p>No pets to be seen</p>
+        <p>No pets to be seen</p>
         @endforelse
     </table>
 

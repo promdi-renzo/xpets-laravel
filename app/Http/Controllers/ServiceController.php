@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -48,7 +49,7 @@ class ServiceController extends Controller
             $file = $request->file("images");
             $extension = $file->getClientOriginalExtension();
             $filename = time() . "." . $extension;
-            $file->move("uploads/services/", $filename);
+            $file->move("pics/services/", $filename);
             $services->images = $filename;
         }
         $services->save();
@@ -63,8 +64,12 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $services = Service::find($id);
-        return view("services.show")->with("services", $services);
+        $services = DB::table('services')
+            ->select('services.id', 'services.service_name', 'services.cost', 'services.images')
+            ->where('services.id', $id)
+            ->get();
+
+        return View::make('services.show', compact('services'));
     }
 
     /**
@@ -92,13 +97,13 @@ class ServiceController extends Controller
         $services->service_name = $request->input("service_name");
         $services->cost = $request->input("cost");
         if ($request->hasfile("images")) {
-            $destination = "uploads/services/" . $services->images;
+            $destination = "pics/services/" . $services->images;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file("images");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/services/", $filename);
+            $file->move("pics/services/", $filename);
             $services->images = $filename;
         }
         $services->update();
@@ -128,7 +133,7 @@ class ServiceController extends Controller
     public function forceDelete($id)
     {
         $Services = Service::findOrFail($id);
-        $destination = "uploads/Services/" . $Services->images;
+        $destination = "pics/Services/" . $Services->images;
         if (File::exists($destination)) {
             File::delete($destination);
         }

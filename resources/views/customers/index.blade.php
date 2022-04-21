@@ -10,16 +10,16 @@
 
 <div class="py-3">
   <table class="border-collapse shadow">
-      <thead>
-            <tr class="text-gray-50 text-center">
-                <th class="w-screen text-3xl p-3">Id</th>
-                <th class="w-screen text-3xl p-3">Full Name</th>
-                <th class="w-screen text-3xl p-3">Number</th>
-                <th class="w-screen text-3xl p-3">Picture</th>
-                <th class="w-screen text-3xl p-3">Animal</th>
-                <th class="w-screen text-3xl p-3">Actions</th>
-            </tr>
-        </thead>
+    <thead>
+      <tr class="text-gray-50 text-center">
+        <th class="w-screen text-3xl p-3">Id</th>
+        <th class="w-screen text-3xl p-3">Full Name</th>
+        <th class="w-screen text-3xl p-3">Number</th>
+        <th class="w-screen text-3xl p-3">Picture</th>
+        <th class="w-screen text-3xl p-3">Pet</th>
+        <th class="w-screen text-3xl p-3">Actions</th>
+      </tr>
+    </thead>
 
 
     @forelse ($customers as $customer)
@@ -35,7 +35,7 @@
         {{ $customer->number }}
       </td>
       <td class="pl-12">
-        <img src="{{ asset('pics/customers/'.$customer->images)}}" alt="Pic" width="75" height="75">
+        <img src="{{ asset('pics/customers/'.$customer->pictures)}}" alt="Pic" width="75" height="75">
       </td>
       <td class=" text-center text-3xl">
         {{ $customer->pet_name }}

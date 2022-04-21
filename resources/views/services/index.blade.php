@@ -36,7 +36,7 @@
                 {{ $service->cost }}
             </td>
             <td class="pl-10">
-                <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
+                <img src="{{ asset('pics/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
                 <a href="service/{{ $service->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">

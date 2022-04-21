@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create("pets", function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column:"pet_name");
-            $table->string(column:"sex");
-            $table->string(column:"classification");
-            $table->string(column:"pictures");
-            $table->integer(column:"customer_id")->unsigned();
+            $table->string(column: "pet_name");
+            $table->string(column: "sex");
+            $table->string(column: "classification");
+            $table->string(column: "pictures")->default('default.jpg');
+            $table->integer(column: "customer_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
@@ -28,7 +28,6 @@ return new class extends Migration
                 ->on("customers")
                 ->onDelete("cascade");
         });
-
     }
 
     /**

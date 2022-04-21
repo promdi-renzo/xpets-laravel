@@ -149,6 +149,7 @@ Route::get("signin", [
     "uses" => "employeeController@getSignin",
     "as" => "employee.signin",
 ])->middleware("guest");
+
 Route::post("email", [
     "uses" => "employeeController@Email",
     "as" => "employee.email",

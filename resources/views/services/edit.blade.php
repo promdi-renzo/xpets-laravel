@@ -33,8 +33,8 @@
                 <div>
                     <label for="images" class="block text-lg pb-3">Service Pic</label>
                     {{ Form::file('images',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'images')) }}
-                    <img src="{{ asset('uploads/services/'.$services->images)}}" alt="I am A Pic" width="100"
-                        height="100" class="ml-24 py-2">
+                    <img src="{{ asset('pics/services/'.$services->images)}}" alt="I am A Pic" width="100" height="100"
+                        class="ml-24 py-2">
                     @if($errors->has('images'))
                     <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
                     @endif

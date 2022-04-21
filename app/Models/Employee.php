@@ -14,6 +14,7 @@ class Employee extends Authenticatable
         "full_name" => ["required", "string", "min:5"],
         "email" => ["required", "string", "email", "unique:employees"],
         "password" => ["required", "min:5", "confirmed"],
+        "pictures" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
     ];
 
     protected $dates = ["deleted_at"];
@@ -31,14 +32,14 @@ class Employee extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ["full_name", "email", "password", "role"];
+    protected $fillable = ["full_name", "email", "password", "pictures"];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = ["password", "remember_token"];
+    protected $hidden = ["password"];
 
     /**
      * The attributes that should be cast.

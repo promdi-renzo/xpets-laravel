@@ -46,14 +46,14 @@
                 </div>
 
                 <div>
-                    <label for="employeee_id" class="text-lg">Type</label>
-                    {!! Form::select('employeee_id',$employeees, $consultations->employeee_id ,['class' => 'block
+                    <label for="employee_id" class="text-lg">Type</label>
+                    {!! Form::select('employee_id',$employees, $consultations->employee_id ,['class' => 'block
                     shadow-5xl
                     p-2
                     my-2
                     w-full']) !!}
-                    @if($errors->has('employeee_id'))
-                    <p class="text-center text-red-500">{{ $errors->first('employeee_id ') }}</p>
+                    @if($errors->has('employee_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('employee_id ') }}</p>
                     @endif
                 </div>
 
@@ -70,12 +70,12 @@
                 </div>
 
 
-                    <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
-                        Submit
-                    </button>
-                    <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                        role="button">Cancel</a>
-                </div>
+                <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+                    Submit
+                </button>
+                <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
+                    role="button">Cancel</a>
+            </div>
 
             </form>
         </div>

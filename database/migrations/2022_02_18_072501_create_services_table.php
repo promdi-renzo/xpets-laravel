@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments("id");
             $table->string(column: "service_name");
             $table->string(column: "cost");
-            $table->string(column: "images");
+            $table->string(column: "images")->default('default.jpg');
             $table->timestamps();
             $table->softDeletes();
         });

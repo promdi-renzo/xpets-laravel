@@ -8,6 +8,7 @@ use App\Models\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class PetController extends Controller
 {
@@ -25,13 +26,12 @@ class PetController extends Controller
             "pets.customer_id"
         )
             ->select(
-                "customers.first_name",
+                "customers.full_name",
                 "pets.id",
-                "pets.Pet_name",
-                "pets.age",
+                "pets.pet_name",
                 "pets.sex",
-                "pets.type",
-                "pets.images",
+                "pets.classification",
+                "pets.pictures",
                 "pets.customer_id",
                 "pets.deleted_at"
             )
@@ -71,7 +71,7 @@ class PetController extends Controller
         if ($request->hasfile("pictures")) {
             $file = $request->file("pictures");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("pictures/pets/", $filename);
+            $file->move("pics/pets/", $filename);
             $pets->pictures = $filename;
         }
         $pets->save();
@@ -86,12 +86,26 @@ class PetController extends Controller
      */
     public function show($id)
     {
-        $pets = Pet::find($id);
-        $customers = Customer::pluck("full_name", "id");
-        return view("pets.show", [
-            "pets" => $pets,
-            "customers" => $customers,
-        ]);
+        $pets = pet::join(
+            "customers",
+            "customers.id",
+            "=",
+            "pets.customer_id"
+        )
+            ->select(
+                "customers.full_name",
+                "pets.id",
+                "pets.pet_name",
+                "pets.sex",
+                "pets.classification",
+                "pets.pictures",
+                "pets.customer_id",
+                "pets.deleted_at"
+            )
+            ->where('pets.id', $id)
+            ->get();
+
+        return View::make('pets.show', compact('pets'));
     }
 
     /**
@@ -125,14 +139,14 @@ class PetController extends Controller
         $pets->classification = $request->input("classification");
         $pets->customer_id = $request->input("customer_id");
         if ($request->hasfile("pictures")) {
-            $destination = "pictures/pets/" . $pets->pictures;
+            $destination = "pics/pets/" . $pets->pictures;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file("pictures");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("pictures/pets/", $filename);
-            $pets->images = $filename;
+            $file->move("pics/pets/", $filename);
+            $pets->pictures = $filename;
         }
         $pets->update();
         return Redirect::to("pets");
@@ -161,7 +175,7 @@ class PetController extends Controller
     public function forceDelete($id)
     {
         $pets = Pet::findOrFail($id);
-        $destination = "pictures/pets/" . $pets->pictures;
+        $destination = "pics/pets/" . $pets->pictures;
         if (File::exists($destination)) {
             File::delete($destination);
         }

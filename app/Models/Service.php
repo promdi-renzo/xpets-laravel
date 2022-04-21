@@ -10,7 +10,7 @@ class Service extends Model
 {
     public const VAL = [
         "service_name" => ["required", "min:3"],
-        "cost" => ["required", "numeric", "min:3"],
+        "cost" => ["required", "min:3"],
         "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
     ];
 
@@ -27,9 +27,4 @@ class Service extends Model
     protected $primaryKey = "id";
 
     protected $guarded = ["id"];
-
-    //public function animal()
-    //{
-    //  return $this->belongsTo("\App\Models\Animal", "pets_id");
-    //}
 }

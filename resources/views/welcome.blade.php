@@ -410,16 +410,18 @@
         @if (Route::has('employee.signin'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
             @else
-                <a href="{{ route('employee.signin') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+            <a href="{{ route('employee.signin') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log
+                in</a>
 
-                @if (Route::has('employeee.signup'))
-                    <a href="{{ route('employeee.signup') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                @endif
+            @if (Route::has('employee.signup'))
+            <a href="{{ route('employee.signup') }}"
+                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+            @endif
             @endauth
         </div>
-    @endif
+        @endif
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">

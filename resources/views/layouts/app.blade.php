@@ -31,22 +31,10 @@
                     <button><a href="{{ URL('service') }}">
                             <h5 class="mr-4">Service</h5>
                         </a></button>
-                    <button><a href="{{ URL('consultation') }}">
-                            <h5 class="mr-4">Consultations</h5>
+                    <button><a href={{ URL('employee') }}>
+                            <h5 class="mr-4">employee</h5>
                         </a></button>
-                    <button><a href="{{ URL('contact') }}">
-                            <h5 class="mr-4">Feedback</h5>
-                        </a></button>
-                    <button><a href={{ URL('employeee') }}>
-                            <h5 class="mr-4">employeee</h5>
-                        </a></button>
-                    <li class="nav-item">
-                        <a href="{{ route('transaction.shoppingCart') }}">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
-                            <span class="text-xs text-white">{{ Session::has('cart') ? Session::get('cart')->totalCost :
-                                '' }}</span>
-                        </a>
-                    </li>
+
                 </ul>
 
 
@@ -59,33 +47,28 @@
                     </li>
                     @endif
 
-                    @if (Route::has('employeee.signup'))
+                    @if (Route::has('employee.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('employeee.signup') }}">{{ __('Sign Up') }}</a>
+                        <a class="nav-link text-white" href="{{ route('employee.signup') }}">{{ __('Sign Up') }}</a>
                     </li>
                     @endif
                     @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->full_name }}
-                        </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('employee.logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                        {{ Auth::user()->full_name }}
 
-                            <form id="logout-form" action="{{ route('employee.logout') }}" method="POST"
-                                class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" href="{{ route('employee.logout') }}">{{ __('Logout') }}</a>
                     </li>
-                    @endguest
-                </ul>
+
+                    <form id="logout-form" action="{{ route('employee.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
             </div>
+            </li>
+            @endguest
+            </ul>
+        </div>
         </div>
     </nav>
     </header>

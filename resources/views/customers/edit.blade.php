@@ -9,7 +9,7 @@
     </div>
     <div>
         <div class="flex justify-center pt-4">
-            {{ Form::model($Customers,['route' => ['customer.update',$Customers->id],'method'=>'PUT',
+            {{ Form::model($customers,['route' => ['customer.update',$customers->id],'method'=>'PUT',
             'enctype'=>'multipart/form-data']) }}
             <div class="block">
                 <div>
@@ -32,8 +32,9 @@
 
                 <div>
                     <label for="pictures" class="block text-lg pb-3">Pictures</label>
-                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures')) }}
-                    <img src="{{ asset('pics/customers/'.$Customers->pictures)}}" alt="I am A Pic" width="100"
+                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures'))
+                    }}
+                    <img src="{{ asset('pics/customers/'.$customers->pictures)}}" alt="I am A Pic" width="100"
                         height="100" class="ml-24 py-2">
                     @if($errors->has('pictures'))
                     <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>
@@ -41,11 +42,11 @@
                 </div>
 
 
-                    <button type="submit" class="text-red-600 p-3 italic bg-black text-lg">
-                        Submit
-                    </button>
-                    <a href="{{url()->previous()}}" class="text-red-600 p-3 italic bg-black text-lg"
-                        role="button">Cancel</a>
+                <button type="submit" class="text-red-600 p-3 italic bg-black text-lg">
+                    Submit
+                </button>
+                <a href="{{url()->previous()}}" class="text-red-600 p-3 italic bg-black text-lg"
+                    role="button">Cancel</a>
 
             </div>
             </form>

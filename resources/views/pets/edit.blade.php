@@ -31,7 +31,8 @@
 
                 <div>
                     <label for="classification" class="text-lg">classification</label>
-                    {{ Form::text('classification',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'classification')) }}
+                    {{ Form::text('classification',null,array('class'=>'block shadow-5xl p-2 my-2
+                    w-full','id'=>'classification')) }}
                     @if($errors->has('classification'))
                     <p class="text-center text-red-500">{{ $errors->first('classification') }}</p>
                     @endif
@@ -39,8 +40,9 @@
 
                 <div>
                     <label for="pictures" class="block text-lg pb-3">Pictures</label>
-                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures')) }}
-                    <img src="{{ asset('pictures/pets/'.$pets->pictures)}}" alt="I am A Pic" width="100" height="100"
+                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures'))
+                    }}
+                    <img src="{{ asset('pics/pets/'.$pets->pictures)}}" alt="I am A Pic" width="100" height="100"
                         class="ml-24 py-2">
                     @if($errors->has('pictures'))
                     <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>

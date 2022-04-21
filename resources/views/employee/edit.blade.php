@@ -9,7 +9,8 @@
     </div>
     <div>
         <div class="flex justify-center pt-4">
-            {{ Form::model($employees,['route' => ['employee.update',$employees->id],'method'=>'PUT']) }}
+            {{ Form::model($employees,['route' =>
+            ['employee.update',$employees->id],'method'=>'PUT','enctype'=>'multipart/form-data' ])}}
             <div class="block">
                 <div>
                     <label for="full_name" class="text-lg">Full Name</label>
@@ -30,17 +31,22 @@
                 </div>
 
                 <div>
-                    <label for="role" class="text-lg">Pick Your Role</label>
-                    {{ Form::select('role',array('Employee' => 'Employee', 'Veterinarian' => 'Veterinarian', 'Volunteer'
-                    => 'Volunteer'))}}
+                    <label for="pictures" class="block text-lg pb-3">Pictures</label>
+                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures'))
+                    }}
+                    <img src="{{ asset('pics/employee/'.$employees->pictures)}}" alt="I am A Pic" width="100"
+                        height="100" class="ml-24 py-2">
+                    @if($errors->has('pictures'))
+                    <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>
+                    @endif
                 </div>
 
 
-                    <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
-                        Submit
-                    </button>
-                    <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                        role="button">Cancel</a>
+                <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+                    Submit
+                </button>
+                <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
+                    role="button">Cancel</a>
 
             </div>
             </form>

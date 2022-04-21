@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create("customers", function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column:"full_name");
-            $table->string(column:"number");
-            $table->string(column:"pictures");
+            $table->string(column: "full_name");
+            $table->string(column: "number");
+            $table->string(column: "pictures")->default('default.jpg');
             $table->timestamps();
             $table->softDeletes();
         });
-
     }
 
     /**

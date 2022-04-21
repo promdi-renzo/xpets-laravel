@@ -57,10 +57,10 @@
                         @endif
                     </div>
 
-                    <label for="employeee_id" class="text-lg">employeee</label>
-                    <select name="employeee_id" id="employeee_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($employeees as $id => $employeee)
-                        <option value="{{ $id }}">{{ $employeee }}</option>
+                    <label for="employee_id" class="text-lg">employee</label>
+                    <select name="employee_id" id="employee_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($employees as $id => $employee)
+                        <option value="{{ $id }}">{{ $employee }}</option>
                         @endforeach
                     </select>
 
@@ -72,11 +72,11 @@
                     </select>
 
 
-                        <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
-                            Submit
-                        </button>
-                        <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                            role="button">Cancel</a>
+                    <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+                        Submit
+                    </button>
+                    <a href="{{url()->previous()}}" class="text-center text-lg bg-black text-red-600 p-2 rounded"
+                        role="button">Cancel</a>
 
                 </div>
             </form>

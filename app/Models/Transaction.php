@@ -16,7 +16,7 @@ class Transaction extends Model
 
     protected $table = "transactions";
 
-    protected $fillable = ["date", "employeee_id"];
+    protected $fillable = ["date", "employee_id"];
 
     protected $primaryKey = "id";
 

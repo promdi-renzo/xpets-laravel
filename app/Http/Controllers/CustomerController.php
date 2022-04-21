@@ -19,7 +19,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $Customers = Customer::leftJoin(
+        $customers = Customer::leftJoin(
             "pets",
             "customers.id",
             "=",
@@ -33,12 +33,11 @@ class CustomerController extends Controller
                 "customers.deleted_at",
                 "pets.pet_name"
             )
-            ->orderBy("Customers.id", "ASC")
+            ->orderBy("customers.id", "ASC")
             ->withTrashed()
             ->paginate(100);
 
-        return view("customers.index", ["customers" => $Customers]);
-
+        return view("customers.index", ["customers" => $customers]);
     }
 
     /**
@@ -78,10 +77,27 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return View::make("customers.show", compact("Customers"));
+        $customers = Customer::leftJoin(
+            "pets",
+            "customers.id",
+            "=",
+            "pets.customer_id"
+        )
+            ->select(
+                "customers.id",
+                "customers.full_name",
+                "customers.number",
+                "customers.pictures",
+                "customers.deleted_at",
+                "pets.pet_name"
+            )
+            ->where('customers.id', $id)
+            ->get();
+
+        return View::make('customers.show', compact('customers'));
     }
 
     /**
@@ -92,8 +108,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return View::make("customers.edit", compact("Customers"));
+        $customers = Customer::find($id);
+        return View::make("customers.edit", compact("customers"));
     }
 
     /**

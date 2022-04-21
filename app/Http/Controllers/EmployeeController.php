@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class EmployeeController extends Controller
 {
@@ -21,13 +24,16 @@ class EmployeeController extends Controller
 
     public function postSignup(EmployeeRequest $request)
     {
-        $Employees = new Employee([
-            "full_name" => $request->full_name,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-            "role" => $request->role,
-        ]);
-
+        $Employees = new Employee();
+        $Employees->full_name = $request->input("full_name");
+        $Employees->email = $request->input("email");
+        $Employees->password = Hash::make($request->input("password"));
+        if ($request->hasfile("pictures")) {
+            $file = $request->file("pictures");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("pics/employee/", $filename);
+            $Employees->pictures = $filename;
+        }
         $Employees->save();
         Auth::login($Employees);
         return redirect::route("employee.dashboard");
@@ -84,7 +90,6 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //  return view("employee.create");
     }
 
     /**
@@ -93,7 +98,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmployeeRequest $request)
+    public function store(Request $request)
     {
     }
 
@@ -105,8 +110,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $Employees = Employee::find($id);
-        return view("employee.show")->with("employees", $Employees);
+        $Employees = DB::table('employees')
+            ->select('employees.id', 'employees.full_name', 'employees.email', 'employees.pictures')
+            ->where('employees.id', $id)
+            ->get();
+
+        return View::make('employees.show', compact('employees'));
     }
 
     /**
@@ -133,8 +142,16 @@ class EmployeeController extends Controller
         $employees = Employee::find($id);
         $employees->full_name = $request->input("full_name");
         $employees->email = $request->input("email");
-        $employees->password = Hash::make($request->input("password"));
-        $employees->role = $request->input("role");
+        if ($request->hasfile("pictures")) {
+            $destination = "pics/employee/" . $employees->pictures;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file("pictures");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("pics/employee/", $filename);
+            $employees->pictures = $filename;
+        }
         $employees->update();
         return Redirect::to("employee");
     }
@@ -161,8 +178,12 @@ class EmployeeController extends Controller
 
     public function forceDelete($id)
     {
-        $Employees = Employee::findOrFail($id);
-        $Employees->forceDelete();
+        $employees = Employee::findOrFail($id);
+        $destination = "pics/employee/" . $employees->pictures;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $employees->forceDelete();
         return Redirect::route("employee.index");
     }
 }

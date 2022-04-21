@@ -4,36 +4,43 @@
 <div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
-            Show employeee
+            Show employee
         </h1>
     </div>
-    <div>
-        <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($employeees,['route' => ['employeee.show',$employeees->id],'method'=>'PUT']) }}
-            <div class="block">
-                <div class="grid grid-cols-2 py-2">
-                    <label for="full_name" class="text-lg">Full Name</label>
-                    {{ Form::text('full_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'full_name')) }}
-                </div>
+    <div class="py-3">
+        <table class="border-collapse shadow">
+            <thead>
+                <tr class="text-gray-50 text-center">
+                    <th class="w-screen text-3xl p-3">Id</th>
+                    <th class="w-screen text-3xl p-3">Full Name</th>
+                    <th class="w-screen text-3xl p-3">Email</th>
+                    <th class="w-screen text-3xl p-3">Pic</th>
+                    <th class="w-screen text-3xl p-3">Update</th>
+                    <th class="w-screen text-3xl p-3">Delete</th>
+                    <th class="w-screen text-3xl p-3">Restore</th>
+                    <th class="w-screen text-3xl p-3">Destroy</th>
+                </tr>
+            </thead>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="email" class="text-lg">Email</label>
-                    {{ Form::email('email',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'email')) }}
-                </div>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="role" class="text-lg mt-2">Pick Your Role</label>
-                    {{ Form::text('role',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'role')) }}
-                </div>
-
-                <div class="grid justify-center w-full">
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
-                        role="button">Go Back &rarr;</a>
-                </div>
-            </div>
-            </form>
-        </div>
-        @endsection
+            @forelse ($employees as $employee)
+            <tr>
+                <td class="text-center text-3xl">
+                    <a href="{{route('employee.show',$employee->id)}}">{{$employee->id}}</a>
+                </td>
+                <td class="text-center text-3xl">
+                    {{ $employee->full_name }}
+                </td>
+                <td class="text-center text-3xl">
+                    {{ $employee->email }}
+                </td>
+                <td class="pl-12">
+                    <img src="{{ asset('pics/employee/'.$employee->pictures)}}" alt="Pic" width="75" height="75">
+                </td>
+            </tr>
+            @empty
+            <p>No employee Data in the Database</p>
+            @endforelse
+        </table>
+    </div>
+    @endsection

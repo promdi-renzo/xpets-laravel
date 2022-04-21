@@ -36,8 +36,8 @@
                 </div>
 
                 <div>
-                    <label for="employeee_id" class="text-lg">Type</label>
-                    {!! Form::select('employeee_id',$employeees, $consultations->employeee_id ,['class' => 'block
+                    <label for="employee_id" class="text-lg">Type</label>
+                    {!! Form::select('employee_id',$employees, $consultations->employee_id ,['class' => 'block
                     shadow-5xl
                     p-2
                     my-2
