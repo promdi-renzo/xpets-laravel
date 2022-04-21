@@ -29,7 +29,7 @@
             <img src="{{ asset('uploads/pets/'.$animal->images)}}" alt="I am A Pic" width="400"
                 style="max-height: 12rem;">
             <div class="p-3">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $animal->animal_name }}
+                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $animal->pet_name }}
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $animal->type }}</p>
                 <div class="grid grid-flow-col gap-2">

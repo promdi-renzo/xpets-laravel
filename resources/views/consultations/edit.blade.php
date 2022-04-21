@@ -46,14 +46,14 @@
                 </div>
 
                 <div>
-                    <label for="personnel_id" class="text-lg">Type</label>
-                    {!! Form::select('personnel_id',$personnels, $consultations->personnel_id ,['class' => 'block
+                    <label for="employeee_id" class="text-lg">Type</label>
+                    {!! Form::select('employeee_id',$employeees, $consultations->employeee_id ,['class' => 'block
                     shadow-5xl
                     p-2
                     my-2
                     w-full']) !!}
-                    @if($errors->has('personnel_id'))
-                    <p class="text-center text-red-500">{{ $errors->first('personnel_id ') }}</p>
+                    @if($errors->has('employeee_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('employeee_id ') }}</p>
                     @endif
                 </div>
 

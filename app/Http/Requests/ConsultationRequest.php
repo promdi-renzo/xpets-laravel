@@ -24,6 +24,6 @@ class ConsultationRequest extends FormRequest
      */
     public function rules()
     {
-        return Consultation::VALIDATION_RULES;
+        return Consultation::VAL;
     }
 }

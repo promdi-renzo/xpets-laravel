@@ -55,7 +55,7 @@
                         <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                             Submit
                         </button>
-                        <a href="{{route('personnel.signin')}}"
+                        <a href="{{route('employee.signin')}}"
                             class="text-center text-lg bg-black text-red-600 p-2 rounded" role="button">Go Back</a>
                     </div>
                 </div>

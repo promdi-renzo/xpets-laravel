@@ -55,7 +55,7 @@
                 {{ $consultation->full_name }}
             </td>
             <td class=" text-center text-2xl">
-                {{ $consultation->animal_name }}
+                {{ $consultation->pet_name }}
             </td>
             <td class="text-center">
                 <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">

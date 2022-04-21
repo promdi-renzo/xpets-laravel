@@ -27,24 +27,14 @@ Route::get("/contact/forceDelete/{id}", [
     "as" => "contact.forceDelete",
 ]);
 Route::get("/review", [ContactController::class, "review"])->name("review");
-Route::post("/send", [ContactController::class, "send"])->name("send");
-Route::resource("/pets", "PetController")->middleware("auth");
-Route::get("/pets/restore/{id}", [
-    "uses" => "PetController@restore",
-    "as" => "pets.restore",
-]);
-Route::get("/pets/forceDelete/{id}", [
-    "uses" => "PetController@forceDelete",
-    "as" => "pets.forceDelete",
-]);
-Route::resource("/customer", "CustomerController")->middleware("auth");
-Route::get("/customer/restore/{id}", [
-    "uses" => "CustomerController@restore",
-    "as" => "customer.restore",
-]);
+
 Route::get("/customer/forceDelete/{id}", [
     "uses" => "CustomerController@forceDelete",
     "as" => "customer.forceDelete",
+]);
+Route::get("/customer/restore/{id}", [
+    "uses" => "CustomerController@restore",
+    "as" => "customer.restore",
 ]);
 Route::resource("/diseaseinjury", diseaseInjuryController::class)->middleware(
     "auth"
@@ -53,33 +43,33 @@ Route::get("/diseaseinjury/restore/{id}", [
     "uses" => "diseaseInjuryController@restore",
     "as" => "diseaseinjury.restore",
 ]);
+Route::resource("/employee", "employeeController")->middleware("auth");
 Route::get("/diseaseinjury/forceDelete/{id}", [
     "uses" => "diseaseInjuryController@forceDelete",
     "as" => "diseaseinjury.forceDelete",
 ]);
-Route::resource("/personnel", "personnelController")->middleware("auth");
-Route::get("/personnel/restore/{id}", [
-    "uses" => "personnelController@restore",
-    "as" => "personnel.restore",
+Route::get("/employee/restore/{id}", [
+    "uses" => "employeeController@restore",
+    "as" => "employee.restore",
 ]);
-Route::get("/personnel/forceDelete/{id}", [
-    "uses" => "personnelController@forceDelete",
-    "as" => "personnel.forceDelete",
+Route::get("/employee/forceDelete/{id}", [
+    "uses" => "employeeController@forceDelete",
+    "as" => "employee.forceDelete",
 ]);
-Route::resource("/service", ServiceController::class)->middleware("auth");
 Route::get("/service/restore/{id}", [
     "uses" => "ServiceController@restore",
     "as" => "service.restore",
 ]);
+Route::resource("/service", ServiceController::class)->middleware("auth");
 Route::get("/service/forceDelete/{id}", [
     "uses" => "ServiceController@forceDelete",
     "as" => "service.forceDelete",
 ]);
-Route::resource("/consultation", ConsultationController::class)->middleware("auth");
 Route::get("/consultation/restore/{id}", [
     "uses" => "ConsultationController@restore",
     "as" => "consultation.restore",
 ]);
+Route::resource("/consultation", ConsultationController::class)->middleware("auth");
 Route::get("/consultation/forceDelete/{id}", [
     "uses" => "ConsultationController@forceDelete",
     "as" => "consultation.forceDelete",
@@ -90,51 +80,7 @@ Route::resource("/transaction", TransactionController::class)->middleware("auth"
 Route::get("/", function () {
     return view("welcome");
 });
-Route::get("signup", [
-    "uses" => "personnelController@getSignup",
-    "as" => "personnel.signup",
-])->middleware("guest");
-Route::post("signup", [
-    "uses" => "personnelController@postSignup",
-    "as" => "personnel.signup",
-])->middleware("guest");
-Route::get("dashboard", [
-    "uses" => "personnelController@Dashboard",
-    "as" => "personnels.dashboard",
-])->middleware("auth");
-Route::post("logout", [
-    "uses" => "personnelController@getLogout",
-    "as" => "personnel.logout",
-]);
-Route::get("logout", [
-    "uses" => "personnelController@getLogout",
-    "as" => "personnel.logout",
-]);
-Route::post("signin", [
-    "uses" => "personnelController@postSignin",
-    "as" => "personnel.signin",
-])->middleware("guest");
 
-Route::get("signin", [
-    "uses" => "personnelController@getSignin",
-    "as" => "personnel.signin",
-])->middleware("guest");
-Route::post("email", [
-    "uses" => "personnelController@Email",
-    "as" => "personnel.email",
-]);
-Route::get("email", [
-    "uses" => "personnelController@Email",
-    "as" => "personnel.email",
-]);
-Route::post("reset", [
-    "uses" => "personnelController@Reset",
-    "as" => "personnel.reset",
-]);
-Route::get("reset", [
-    "uses" => "personnelController@Reset",
-    "as" => "personnel.reset",
-]);
 Route::get('shopping-cart', [
     'uses' => 'App\Http\Controllers\TransactionController@getCart',
     'as' => 'transaction.shoppingCart',
@@ -161,4 +107,61 @@ Route::get('add-animal/{id}', [
 Route::get('remove/{id}', [
     'uses' => 'App\Http\Controllers\TransactionController@getRemoveItem',
     'as' => 'transaction.remove',
+]);
+
+Route::resource("/pets", "PetController")->middleware("auth");
+Route::get("/pets/restore/{id}", [
+    "uses" => "PetController@restore",
+    "as" => "pets.restore",
+]);
+Route::post("/send", [ContactController::class, "send"])->name("send");
+Route::resource("/customer", "CustomerController")->middleware("auth");
+Route::get("/pets/forceDelete/{id}", [
+    "uses" => "PetController@forceDelete",
+    "as" => "pets.forceDelete",
+]);
+Route::get("signup", [
+    "uses" => "employeeController@getSignup",
+    "as" => "employee.signup",
+])->middleware("guest");
+Route::post("signup", [
+    "uses" => "employeeController@postSignup",
+    "as" => "employee.signup",
+])->middleware("guest");
+Route::get("dashboard", [
+    "uses" => "employeeController@Dashboard",
+    "as" => "employee.dashboard",
+])->middleware("auth");
+Route::post("logout", [
+    "uses" => "employeeController@getLogout",
+    "as" => "employee.logout",
+]);
+Route::get("logout", [
+    "uses" => "employeeController@getLogout",
+    "as" => "employee.logout",
+]);
+Route::post("signin", [
+    "uses" => "employeeController@postSignin",
+    "as" => "employee.signin",
+])->middleware("guest");
+
+Route::get("signin", [
+    "uses" => "employeeController@getSignin",
+    "as" => "employee.signin",
+])->middleware("guest");
+Route::post("email", [
+    "uses" => "employeeController@Email",
+    "as" => "employee.email",
+]);
+Route::get("email", [
+    "uses" => "employeeController@Email",
+    "as" => "employee.email",
+]);
+Route::post("reset", [
+    "uses" => "employeeController@Reset",
+    "as" => "employee.reset",
+]);
+Route::get("reset", [
+    "uses" => "employeeController@Reset",
+    "as" => "employee.reset",
 ]);

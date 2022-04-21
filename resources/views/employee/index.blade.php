@@ -18,35 +18,35 @@
         </thead>
 
 
-        @forelse ($personnels as $personnel)
+        @forelse ($employeees as $employeee)
         <tr>
             <td class="text-center text-3xl">
-                <a href="{{route('personnel.show',$personnel->id)}}">{{$personnel->id}}</a>
+                <a href="{{route('employeee.show',$employeee->id)}}">{{$employeee->id}}</a>
             </td>
             <td class="text-center text-3xl">
-                {{ $personnel->full_name }}
+                {{ $employeee->full_name }}
             </td>
             <td class="text-center text-3xl">
-                {{ $personnel->email }}
+                {{ $employeee->email }}
             </td>
             <td class="text-center text-3xl">
-                {{ $personnel->role }}
+                {{ $employeee->role }}
             </td>
             <td class=" text-center">
-                <a href="personnel/{{ $personnel->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+                <a href="employeee/{{ $employeee->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Update
                 </a>
             </td>
             <td class=" text-center">
-                {!! Form::open(array('route' => array('personnel.destroy', $personnel->id),'method'=>'DELETE')) !!}
+                {!! Form::open(array('route' => array('employeee.destroy', $employeee->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Delete
                 </button>
                 {!! Form::close() !!}
             </td>
-            @if($personnel->deleted_at)
+            @if($employeee->deleted_at)
             <td>
-                <a href="{{ route('personnel.restore', $personnel->id) }}">
+                <a href="{{ route('employeee.restore', $employeee->id) }}">
                     <p class="text-center text-lg bg-black text-red-600 p-2 rounded">
                         Restore
                     </p>
@@ -62,7 +62,7 @@
             </td>
             @endif
             <td>
-                <a href="{{ route('personnel.forceDelete', $personnel->id) }}">
+                <a href="{{ route('employeee.forceDelete', $employeee->id) }}">
                     <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy
@@ -71,10 +71,10 @@
             </td>
         </tr>
         @empty
-        <p>No Personnel Data in the Database</p>
+        <p>No employeee Data in the Database</p>
         @endforelse
     </table>
-    <div class="pt-6 px-4">{{ $personnels->links()}}</div>
+    <div class="pt-6 px-4">{{ $employeees->links()}}</div>
 </div>
 </div>
 @endsection

@@ -24,7 +24,7 @@
             @forelse ($consultations as $consultation)
             <tr>
                 <td class=" text-center text-4xl">
-                    {{ $consultation->animal_name }}
+                    {{ $consultation->pet_name }}
                 </td>
                 <td class=" text-center text-4xl">
                     {{ $consultation->date }}

@@ -36,8 +36,8 @@
                     <button><a href="{{ URL('contact') }}">
                             <h5 class="mr-4">Feedback</h5>
                         </a></button>
-                    <button><a href={{ URL('personnel') }}>
-                            <h5 class="mr-4">Personnel</h5>
+                    <button><a href={{ URL('employeee') }}>
+                            <h5 class="mr-4">employeee</h5>
                         </a></button>
                     <li class="nav-item">
                         <a href="{{ route('transaction.shoppingCart') }}">
@@ -53,15 +53,15 @@
                     <!-- Authentication Links -->
 
                     @guest
-                    @if (Route::has('personnel.signin'))
+                    @if (Route::has('employee.signin'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signin') }}">{{ __('Sign In') }}</a>
+                        <a class="nav-link text-white" href="{{ route('employee.signin') }}">{{ __('Sign In') }}</a>
                     </li>
                     @endif
 
-                    @if (Route::has('personnel.signup'))
+                    @if (Route::has('employee.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signup') }}">{{ __('Sign Up') }}</a>
+                        <a class="nav-link text-white" href="{{ route('employee.signup') }}">{{ __('Sign Up') }}</a>
                     </li>
                     @endif
                     @else
@@ -72,12 +72,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('personnel.logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item" href="{{ route('employee.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST"
+                            <form id="logout-form" action="{{ route('employee.logout') }}" method="POST"
                                 class="d-none">
                                 @csrf
                             </form>

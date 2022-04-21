@@ -7,7 +7,7 @@
         Sign Up
     </h1>
 
-    <form method="POST" action="{{ route('personnel.signup') }}">
+    <form method="POST" action="{{ route('employeee.signup') }}">
         @csrf
 
         <div class="row mb-3">

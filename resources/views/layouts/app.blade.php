@@ -1,30 +1,11 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body class="">
-
-    <div id="app"></div>
 
     <nav class="flex justify-between items-center p-5 navbar navbar-expand-md">
         <div class="container">
@@ -56,8 +37,8 @@
                     <button><a href="{{ URL('contact') }}">
                             <h5 class="mr-4">Feedback</h5>
                         </a></button>
-                    <button><a href={{ URL('personnel') }}>
-                            <h5 class="mr-4">Personnel</h5>
+                    <button><a href={{ URL('employeee') }}>
+                            <h5 class="mr-4">employeee</h5>
                         </a></button>
                     <li class="nav-item">
                         <a href="{{ route('transaction.shoppingCart') }}">
@@ -68,20 +49,19 @@
                     </li>
                 </ul>
 
-                <!-- Right Side Of Navbar -->
+
                 <ul class="navbar-nav ms-auto text-2xl">
-                    <!-- Authentication Links -->
 
                     @guest
-                    @if (Route::has('personnel.signin'))
+                    @if (Route::has('employee.signin'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signin') }}">{{ __('Sign In') }}</a>
+                        <a class="nav-link text-white" href="{{ route('employee.signin') }}">{{ __('Sign In') }}</a>
                     </li>
                     @endif
 
-                    @if (Route::has('personnel.signup'))
+                    @if (Route::has('employeee.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signup') }}">{{ __('Sign Up') }}</a>
+                        <a class="nav-link text-white" href="{{ route('employeee.signup') }}">{{ __('Sign Up') }}</a>
                     </li>
                     @endif
                     @else
@@ -92,12 +72,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('personnel.logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item" href="{{ route('employee.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST"
+                            <form id="logout-form" action="{{ route('employee.logout') }}" method="POST"
                                 class="d-none">
                                 @csrf
                             </form>

@@ -6,7 +6,7 @@
         Sign In
     </h1>
 
-    <form method="POST" action="{{ route('personnel.signin') }}">
+    <form method="POST" action="{{ route('employee.signin') }}">
         @csrf
 
         <div class="">
@@ -43,8 +43,8 @@
         <div class="">
             <div class="bg-red-800">
                 <input type="submit" value="Sign In" class="p-3 ">
-                @if (Route::has('personnel.email'))
-                <a class="" href="{{ route('personnel.email') }}">
+                @if (Route::has('employeee.email'))
+                <a class="" href="{{ route('employeee.email') }}">
                     Forgot Your Password
                 </a>
                 @endif

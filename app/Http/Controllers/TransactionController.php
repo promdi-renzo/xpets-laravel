@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Models\Animal;
 use App\Models\Customer;
-use App\Models\Personnel;
+use App\Models\Employee;
 use App\Models\Service;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -48,16 +48,16 @@ class TransactionController extends Controller
                 "transaction_line.transaction_id"
             )
             ->leftjoin(
-                "personnels",
-                "personnels.id",
+                "employees",
+                "employees.id",
                 "=",
-                "transactions.personnel_id"
+                "transactions.employee_id"
             )
             ->select(
                 "transactions.id",
-                "pets.animal_name",
+                "pets.pet_name",
                 "services.service_name",
-                "personnels.full_name",
+                "employees.full_name",
                 "transactions.date",
                 "transactions.deleted_at",
                 "transaction_line.deleted_at",
@@ -145,8 +145,8 @@ class TransactionController extends Controller
         try {
             DB::beginTransaction();
             $transactions = new Transaction();
-            $personnels = Personnel::where('id', Auth::id())->first();
-            $transactions->personnel_id = $personnels->id;
+            $employees = employee::where('id', Auth::id())->first();
+            $transactions->employee_id = $employees->id;
             $transactions->date = now();
             $transactions->save();
 
@@ -202,7 +202,7 @@ class TransactionController extends Controller
             )
             ->select(
                 "customers.first_name",
-                "pets.animal_name",
+                "pets.pet_name",
                 "services.service_name",
                 "services.cost",
                 "transactions.id",

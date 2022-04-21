@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConsultationRequest;
 use App\Models\Animal;
 use App\Models\Consultation;
-use App\Models\Personnel;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -16,10 +16,10 @@ class ConsultationController extends Controller
     public function search()
     {
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "employees",
+            "employees.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.employee_id"
         )
             ->join(
                 "pets",
@@ -28,14 +28,14 @@ class ConsultationController extends Controller
                 "consultations.animal_id"
             )
             ->select(
-                "personnels.full_name",
-                "pets.animal_name",
+                "employees.full_name",
+                "pets.pet_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
+                "consultations.employee_id",
                 "consultations.animal_id",
                 "consultations.deleted_at"
             )
@@ -50,10 +50,10 @@ class ConsultationController extends Controller
     {
         $result = $_GET["result"];
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "employees",
+            "employees.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.employee_id"
         )
             ->join(
                 "pets",
@@ -62,19 +62,19 @@ class ConsultationController extends Controller
                 "consultations.animal_id"
             )
             ->select(
-                "personnels.full_name",
-                "pets.animal_name",
+                "employees.full_name",
+                "pets.pet_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
+                "consultations.employee_id",
                 "consultations.animal_id",
                 "consultations.deleted_at"
             )
 
-            ->where("pets.animal_name", "LIKE", "%" . $result . "%")
+            ->where("pets.pet_name", "LIKE", "%" . $result . "%")
             ->get();
         return view("consultations.result", [
             "consultations" => $consultations,
@@ -89,10 +89,10 @@ class ConsultationController extends Controller
     public function index()
     {
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "employees",
+            "employees.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.employee_id"
         )
             ->join(
                 "pets",
@@ -101,14 +101,14 @@ class ConsultationController extends Controller
                 "consultations.animal_id"
             )
             ->select(
-                "personnels.full_name",
-                "pets.animal_name",
+                "employees.full_name",
+                "pets.pet_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
+                "consultations.employee_id",
                 "consultations.animal_id",
                 "consultations.deleted_at"
             )
@@ -126,11 +126,11 @@ class ConsultationController extends Controller
      */
     public function create()
     {
-        $pets = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = Animal::pluck("pet_name", "id");
+        $employees = employee::pluck("full_name", "id");
         return view("consultations.create", [
             "pets" => $pets,
-            "personnels" => $personnels,
+            "employees" => $employees,
         ]);
     }
 
@@ -149,7 +149,7 @@ class ConsultationController extends Controller
             $consultations->disease_injury = $request->input("disease_injury");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
-            $consultations->personnel_id = $request->input("personnel_id");
+            $consultations->employee_id = $request->input("employee_id");
             $consultations->animal_id = $request->input("animal_id");
             $consultations->save();
         } catch (\Exception$e) {
@@ -172,11 +172,11 @@ class ConsultationController extends Controller
     public function show($id)
     {
         $consultations = Consultation::find($id);
-        $pets = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = Animal::pluck("pet_name", "id");
+        $employees = employee::pluck("full_name", "id");
         return view("consultations.show", [
             "pets" => $pets,
-            "personnels" => $personnels,
+            "employees" => $employees,
             "consultations" => $consultations,
         ]);
     }
@@ -190,11 +190,11 @@ class ConsultationController extends Controller
     public function edit($id)
     {
         $consultations = Consultation::find($id);
-        $pets = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = Animal::pluck("pet_name", "id");
+        $employees = employee::pluck("full_name", "id");
         return view("consultations.edit", [
             "pets" => $pets,
-            "personnels" => $personnels,
+            "employees" => $employees,
             "consultations" => $consultations,
         ]);
     }
@@ -215,7 +215,7 @@ class ConsultationController extends Controller
             $consultations->disease_injury = $request->input("disease_injury");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
-            $consultations->personnel_id = $request->input("personnel_id");
+            $consultations->employee_id = $request->input("employee_id");
             $consultations->animal_id = $request->input("animal_id");
             $consultations->update();
         } catch (\Exception$e) {

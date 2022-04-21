@@ -4,12 +4,12 @@
 <div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
-            Update Personnel
+            Update Employee
         </h1>
     </div>
     <div>
         <div class="flex justify-center pt-4">
-            {{ Form::model($personnels,['route' => ['personnel.update',$personnels->id],'method'=>'PUT']) }}
+            {{ Form::model($employees,['route' => ['employee.update',$employees->id],'method'=>'PUT']) }}
             <div class="block">
                 <div>
                     <label for="full_name" class="text-lg">Full Name</label>

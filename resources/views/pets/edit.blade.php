@@ -13,45 +13,37 @@
             'enctype'=>'multipart/form-data']) }}
             <div class="block">
                 <div>
-                    <label for="animal_name" class="text-lg">Animal Name</label>
-                    {{ Form::text('animal_name',null,array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'animal_name')) }}
-                    @if($errors->has('animal_name'))
-                    <p class="text-center text-red-500">{{ $errors->first('animal_name') }}</p>
+                    <label for="pet_name" class="text-lg">Pet Name</label>
+                    {{ Form::text('pet_name',null,array('class'=>'block shadow-5xl p-2 my-2
+                    w-full','id'=>'pet_name')) }}
+                    @if($errors->has('pet_name'))
+                    <p class="text-center text-red-500">{{ $errors->first('pet_name') }}</p>
                     @endif
                 </div>
 
                 <div>
-                    <label for="age" class="text-lg">Age</label>
-                    {{ Form::text('age',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'age')) }}
-                    @if($errors->has('age'))
-                    <p class="text-center text-red-500">{{ $errors->first('age') }}</p>
+                    <label for="sex" class="text-lg">sex</label>
+                    {{ Form::text('sex',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'sex')) }}
+                    @if($errors->has('sex'))
+                    <p class="text-center text-red-500">{{ $errors->first('sex') }}</p>
                     @endif
                 </div>
 
                 <div>
-                    <label for="gender" class="text-lg">Gender</label>
-                    {{ Form::text('gender',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'gender')) }}
-                    @if($errors->has('gender'))
-                    <p class="text-center text-red-500">{{ $errors->first('gender') }}</p>
+                    <label for="classification" class="text-lg">classification</label>
+                    {{ Form::text('classification',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'classification')) }}
+                    @if($errors->has('classification'))
+                    <p class="text-center text-red-500">{{ $errors->first('classification') }}</p>
                     @endif
                 </div>
 
                 <div>
-                    <label for="type" class="text-lg">Type</label>
-                    {{ Form::text('type',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'type')) }}
-                    @if($errors->has('type'))
-                    <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
-                    @endif
-                </div>
-
-                <div>
-                    <label for="images" class="block text-lg pb-3">Animal Pic</label>
-                    {{ Form::file('images',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'images')) }}
-                    <img src="{{ asset('uploads/pets/'.$pets->images)}}" alt="I am A Pic" width="100" height="100"
+                    <label for="pictures" class="block text-lg pb-3">Pictures</label>
+                    {{ Form::file('pictures',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'pictures')) }}
+                    <img src="{{ asset('pictures/pets/'.$pets->pictures)}}" alt="I am A Pic" width="100" height="100"
                         class="ml-24 py-2">
-                    @if($errors->has('images'))
-                    <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
+                    @if($errors->has('pictures'))
+                    <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>
                     @endif
                 </div>
 

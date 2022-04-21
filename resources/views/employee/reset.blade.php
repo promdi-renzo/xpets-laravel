@@ -6,7 +6,7 @@
         {{ __('Reset Password') }}
     </h1>
 
-    <form method="POST" action="{{ route('personnel.reset') }}">
+    <form method="POST" action="{{ route('employeee.reset') }}">
         @csrf
 
         <input type="hidden" name="token" value="{{ $token }}">

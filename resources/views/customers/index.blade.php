@@ -13,15 +13,11 @@
       <thead>
             <tr class="text-gray-50 text-center">
                 <th class="w-screen text-3xl p-3">Id</th>
-                <th class="w-screen text-3xl p-3">First Name</th>
-                <th class="w-screen text-3xl p-3">Last Name</th>
-                <th class="w-screen text-3xl p-3">Phone Number</th>
-                <th class="w-screen text-3xl p-3">Customer Pic</th>
+                <th class="w-screen text-3xl p-3">Full Name</th>
+                <th class="w-screen text-3xl p-3">Number</th>
+                <th class="w-screen text-3xl p-3">Picture</th>
                 <th class="w-screen text-3xl p-3">Animal</th>
-                <th class="w-screen text-3xl p-3">Update</th>
-                <th class="w-screen text-3xl p-3">Delete</th>
-                <th class="w-screen text-3xl p-3">Restore</th>
-                <th class="w-screen text-3xl p-3">Destroy</th>
+                <th class="w-screen text-3xl p-3">Actions</th>
             </tr>
         </thead>
 
@@ -33,19 +29,16 @@
         <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
       </td>
       <td class="text-center text-3xl">
-        {{ $customer->first_name }}
+        {{ $customer->full_name }}
       </td>
       <td class="text-center text-3xl">
-        {{ $customer->last_name }}
-      </td>
-      <td class="text-center text-3xl">
-        {{ $customer->phone_number }}
+        {{ $customer->number }}
       </td>
       <td class="pl-12">
-        <img src="{{ asset('uploads/customers/'.$customer->images)}}" alt="I am A Pic" width="75" height="75">
+        <img src="{{ asset('pics/customers/'.$customer->images)}}" alt="Pic" width="75" height="75">
       </td>
       <td class=" text-center text-3xl">
-        {{ $customer->animal_name }}
+        {{ $customer->pet_name }}
       </td>
       <td class=" text-center">
         <a href="customer/{{ $customer->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
@@ -88,19 +81,12 @@
       </td>
     </tr>
     @empty
-    <p>No customer Data in the Database</p>
+    <p>No Data in the Database</p>
     @endforelse
   </table>
 
   <div class="pt-6 px-4">{{ $customers->links( )}}</div>
 
-  <span class="flex justify-center pt-6">
-    <form action="{{ url('result') }}" type="GET">
-      <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
-      <div class="grid w-full">
-        <button class="text-center text-lg bg-black text-red-600 p-2 rounded">Search</button>
-      </div>
-  </span>
 </div>
 </div>
 @endsection

@@ -19,7 +19,7 @@ class alreadyLogin
         if (
             Session()->has("id") &&
             (url("login") == $req->url() ||
-                url("personnel/create") == $req->url())
+                url("employee/create") == $req->url())
         ) {
             return back();
         }

@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    public const VALIDATION_RULES = [
-        "first_name" => ["required", "min:3"],
-        "last_name" => ["required", "min:3"],
-        "phone_number" => ["required", "min:6"],
-        "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
+    public const VAL = [
+        "full_name" => ["required", "min:8"],
+        "number" => ["required", "min:9"],
+        "pictures" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
     ];
 
     use HasFactory;
@@ -26,7 +25,5 @@ class Customer extends Model
     protected $primaryKey = "id";
 
     protected $guarded = ["id"];
-
-    protected $fillable = ["first_name", "last_name", "phone_number", "images"];
 
 }

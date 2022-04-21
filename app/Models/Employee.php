@@ -3,23 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-class Personnel extends Authenticatable
+
+class Employee extends Authenticatable
 {
-    public const VALIDATION_RULES = [
+    public const VAL = [
         "full_name" => ["required", "string", "min:5"],
-        "email" => ["required", "string", "email", "unique:personnels"],
+        "email" => ["required", "string", "email", "unique:employees"],
         "password" => ["required", "min:5", "confirmed"],
-        "g-recaptcha-response" => "required|captcha",
     ];
 
     protected $dates = ["deleted_at"];
 
-    protected $table = "personnels";
+    protected $table = "employees";
 
     protected $primaryKey = "id";
 

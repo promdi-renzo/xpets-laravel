@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Personnel;
+use App\Models\Employee;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PersonnelRequest extends FormRequest
+class EmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class PersonnelRequest extends FormRequest
      */
     public function rules()
     {
-        return Personnel::VALIDATION_RULES;
+        return Employee::VAL;
     }
 }

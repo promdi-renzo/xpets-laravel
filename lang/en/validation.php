@@ -11,7 +11,7 @@ return [
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
     |
-    */
+     */
 
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
@@ -139,49 +139,35 @@ return [
     | convention "attribute.rule" to name the lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
-    */
+     */
 
     'custom' => [
-        'first_name' => [
-            'required' => 'First name is required',
-            'min' => 'Try again! Your name is too short',
+        'full_name' => [
+            'required' => 'First name is required', //mendoza palitan mo sarile mo comment
+            'min' => 'Try again! Your name is too short', //mendoza
         ],
-        'last_name' => [
-            'required' => 'Last name is required',
-            'min' => 'Try again! Your name is too short',
-        ],
-        'phone_number' => [
+        'number' => [
             'required' => 'Phone number is required',
             'min' => 'Try again! Your number is too short',
         ],
-        'images' => [
+        'pictures' => [
             'required' => 'Image is required',
             'image' => 'The file must be an image',
             'mimes' => 'The image should be an jpg, png, jpeg or a gif',
-            'max' => 'The file size that can be uploaded can only be 5048'
+            'max' => 'The file size that can be uploaded can only be 5048',
         ],
-        'animal_name' => [
+        'pet_name' => [
             'required' => 'Animal name is required',
             'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
-        'age' => [
-            'required' => 'Age is required',
-            'numeric' => 'You can only put numbers here',
-            'min' => 'Age must start at 1',
-            'max' => 'Age must not exceed at 20',
-        ],
-        'gender' => [
-            'required' => 'Gender is required',
+        'sex' => [
+            'required' => 'Sex is required',
             'alpha' => 'You can only put letters here',
         ],
-        'type' => [
+        'classification' => [
             'required' => 'Animal Type is required',
             'alpha' => 'You can only put letters here',
-        ],
-        'full_name' => [
-            'required' => 'Full name is required',
-            'min' => 'Try again! Your name is too short',
         ],
         'email' => [
             'required' => 'Email is required',
@@ -234,7 +220,7 @@ return [
     | with something more reader friendly such as "E-Mail Address" instead
     | of "email". This simply helps us make our message more expressive.
     |
-    */
+     */
 
     'attributes' => [],
 

@@ -57,10 +57,10 @@
                         @endif
                     </div>
 
-                    <label for="personnel_id" class="text-lg">Personnel</label>
-                    <select name="personnel_id" id="personnel_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($personnels as $id => $personnel)
-                        <option value="{{ $id }}">{{ $personnel }}</option>
+                    <label for="employeee_id" class="text-lg">employeee</label>
+                    <select name="employeee_id" id="employeee_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($employeees as $id => $employeee)
+                        <option value="{{ $id }}">{{ $employeee }}</option>
                         @endforeach
                     </select>
 

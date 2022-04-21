@@ -18,7 +18,7 @@
                 {{ $customer->id }}
             </td>
             <td class=" text-center text-3xl">
-                {{ $customer->animal_name }}
+                {{ $customer->pet_name }}
             </td>
             <td class=" text-center text-3xl">
                 {{ $customer->service_name }}

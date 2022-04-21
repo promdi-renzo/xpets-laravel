@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PetRequest;
-use App\Models\Animal;
 use App\Models\Customer;
+use App\Models\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +18,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Animal::join(
+        $pets = Pet::join(
             "customers",
             "customers.id",
             "=",
@@ -27,9 +27,9 @@ class PetController extends Controller
             ->select(
                 "customers.first_name",
                 "pets.id",
-                "pets.animal_name",
+                "pets.Pet_name",
                 "pets.age",
-                "pets.gender",
+                "pets.sex",
                 "pets.type",
                 "pets.images",
                 "pets.customer_id",
@@ -49,7 +49,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        $customers = Customer::pluck("first_name", "id");
+        $customers = Customer::pluck("full_name", "id");
         return view("pets.create", [
             "customers" => $customers,
         ]);
@@ -63,17 +63,16 @@ class PetController extends Controller
      */
     public function store(PetRequest $request)
     {
-        $pets = new Animal();
-        $pets->animal_name = $request->input("animal_name");
-        $pets->age = $request->input("age");
-        $pets->gender = $request->input("gender");
-        $pets->type = $request->input("type");
+        $pets = new Pet();
+        $pets->pet_name = $request->input("pet_name");
+        $pets->sex = $request->input("sex");
+        $pets->classification = $request->input("classification");
         $pets->customer_id = $request->input("customer_id");
-        if ($request->hasfile("images")) {
-            $file = $request->file("images");
+        if ($request->hasfile("pictures")) {
+            $file = $request->file("pictures");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/pets/", $filename);
-            $pets->images = $filename;
+            $file->move("pictures/pets/", $filename);
+            $pets->pictures = $filename;
         }
         $pets->save();
         return Redirect::to("/pets");
@@ -87,8 +86,8 @@ class PetController extends Controller
      */
     public function show($id)
     {
-        $pets = Animal::find($id);
-        $customers = Customer::pluck("first_name", "id");
+        $pets = Pet::find($id);
+        $customers = Customer::pluck("full_name", "id");
         return view("pets.show", [
             "pets" => $pets,
             "customers" => $customers,
@@ -103,8 +102,8 @@ class PetController extends Controller
      */
     public function edit($id)
     {
-        $pets = Animal::find($id);
-        $customers = Customer::pluck("first_name", "id");
+        $pets = Pet::find($id);
+        $customers = Customer::pluck("full_name", "id");
         return view("pets.edit", [
             "pets" => $pets,
             "customers" => $customers,
@@ -120,24 +119,23 @@ class PetController extends Controller
      */
     public function update(PetRequest $request, $id)
     {
-        $pets = Animal::find($id);
-        $pets->animal_name = $request->input("animal_name");
-        $pets->age = $request->input("age");
-        $pets->gender = $request->input("gender");
-        $pets->type = $request->input("type");
+        $pets = Pet::find($id);
+        $pets->pet_name = $request->input("pet_name");
+        $pets->sex = $request->input("sex");
+        $pets->classification = $request->input("classification");
         $pets->customer_id = $request->input("customer_id");
-        if ($request->hasfile("images")) {
-            $destination = "uploads/pets/" . $pets->images;
+        if ($request->hasfile("pictures")) {
+            $destination = "pictures/pets/" . $pets->pictures;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-            $file = $request->file("images");
+            $file = $request->file("pictures");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/pets/", $filename);
+            $file->move("pictures/pets/", $filename);
             $pets->images = $filename;
         }
         $pets->update();
-        return Redirect::to("/pets");
+        return Redirect::to("pets");
     }
 
     /**
@@ -148,13 +146,13 @@ class PetController extends Controller
      */
     public function destroy($id)
     {
-        Animal::destroy($id);
-        return Redirect::to("/pets");
+        Pet::destroy($id);
+        return Redirect::to("pets");
     }
 
     public function restore($id)
     {
-        Animal::onlyTrashed()
+        Pet::onlyTrashed()
             ->findOrFail($id)
             ->restore();
         return Redirect::route("pets.index");
@@ -162,8 +160,8 @@ class PetController extends Controller
 
     public function forceDelete($id)
     {
-        $pets = Animal::findOrFail($id);
-        $destination = "uploads/pets/" . $pets->images;
+        $pets = Pet::findOrFail($id);
+        $destination = "pictures/pets/" . $pets->pictures;
         if (File::exists($destination)) {
             File::delete($destination);
         }

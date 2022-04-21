@@ -4,7 +4,7 @@
 
 <div class="pt-8 pb-4 px-8">
     <a href="pets/create" class="text-red-600 p-3 italic bg-black text-lg">
-        Add a new animal
+        Add a new pet
     </a>
 </div>
 
@@ -13,58 +13,51 @@
         <thead >
             <tr class="text-gray-50 text-center">
                 <th class="w-screen text-3xl p-3">Id</th>
-                <th class="w-screen text-3xl p-3">Animal Name</th>
-                <th class="w-screen text-3xl p-3">Age</th>
-                <th class="w-screen text-3xl p-3">Gender</th>
-                <th class="w-screen text-3xl p-3">Type of Animal</th>
-                <th class="w-screen text-3xl p-3">Owner</th>
-                <th class="w-screen text-3xl p-3">Animal Pic</th>
-                <th class="w-screen text-3xl p-3">Update</th>
-                <th class="w-screen text-3xl p-3">Delete</th>
-                <th class="w-screen text-3xl p-3">Restore</th>
-                <th class="w-screen text-3xl p-3">Destroy</th>
+                <th class="w-screen text-3xl p-3">Pet Name</th>
+                <th class="w-screen text-3xl p-3">Sex</th>
+                <th class="w-screen text-3xl p-3">classification</th>
+                <th class="w-screen text-3xl p-3">Customer</th>
+                <th class="w-screen text-3xl p-3">Pictures</th>
+                <th class="w-screen text-3xl p-3">Actions</th>
             </tr>
         </thead>
 
 
-        @forelse ($pets as $animal)
+        @forelse ($pets as $pet)
         <tr>
             <td class=" text-center text-3xl">
-                <a href="{{route('pets.show',$animal->id)}}">{{$animal->id}}</a>
+                <a href="{{route('pets.show',$pet->id)}}">{{$pet->id}}</a>
             </td>
             <td class=" text-center text-3xl">
-                {{ $animal->animal_name }}
+                {{ $pet->pet_name }}
             </td>
             <td class=" text-center text-3xl">
-                {{ $animal->age }}
+                {{ $pet->sex }}
             </td>
             <td class=" text-center text-3xl">
-                {{ $animal->gender }}
+                {{ $pet->classification }}
             </td>
             <td class=" text-center text-3xl">
-                {{ $animal->type }}
-            </td>
-            <td class=" text-center text-3xl">
-                {{ $animal->first_name }}
+                {{ $pet->full_name }}
             </td>
             <td class="pl-10">
-                <img src="{{ asset('uploads/pets/'.$animal->images)}}" alt="I am A Pic" width="75" height="75">
+                <img src="{{ asset('pictures/pets/'.$pet->images)}}" alt="Picture" width="75" height="75">
             </td>
             <td class=" text-center">
-                <a href="pets/{{ $animal->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+                <a href="pets/{{ $pet->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Update
                 </a>
             </td>
             <td class=" text-center">
-                {!! Form::open(array('route' => array('pets.destroy', $animal->id),'method'=>'DELETE')) !!}
+                {!! Form::open(array('route' => array('pets.destroy', $pet->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Delete
                 </button>
                 {!! Form::close() !!}
             </td>
-            @if($animal->deleted_at)
+            @if($pet->deleted_at)
             <td>
-                <a href="{{ route('pets.restore', $animal->id) }}">
+                <a href="{{ route('pets.restore', $pet->id) }}">
                     <p class="text-center text-lg bg-black text-red-600 p-2 rounded">
                         Restore
                     </p>
@@ -80,7 +73,7 @@
             </td>
             @endif
             <td>
-                <a href="{{ route('pets.forceDelete', $animal->id) }}">
+                <a href="{{ route('pets.forceDelete', $pet->id) }}">
                     <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy

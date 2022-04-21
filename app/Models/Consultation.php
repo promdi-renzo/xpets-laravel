@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Consultation extends Model
 {
-    public const VALIDATION_RULES = [
+    public const VAL = [
         "date" => ["required"],
         "disease_injury" => ["required"],
         "price" => ["required", "numeric", "min:1", "max:10000"],

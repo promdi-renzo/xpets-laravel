@@ -142,7 +142,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         Contact::destroy($id);
-        return Redirect::to("contact");
+        return Redirect::to("contacts");
     }
 
     public function restore($id)
@@ -150,13 +150,13 @@ class ContactController extends Controller
         Contact::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("contact.index");
+        return Redirect::route("contacts.index");
     }
 
     public function forceDelete($id)
     {
         $contacts = Contact::findOrFail($id);
         $contacts->forceDelete();
-        return Redirect::route("contact.index");
+        return Redirect::route("contacts.index");
     }
 }

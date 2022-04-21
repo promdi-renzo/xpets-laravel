@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Animal;
+use App\Models\Pet;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PetRequest extends FormRequest
@@ -24,6 +24,6 @@ class PetRequest extends FormRequest
      */
     public function rules()
     {
-        return Animal::VALIDATION_RULES;
+        return Pet::VAL;
     }
 }

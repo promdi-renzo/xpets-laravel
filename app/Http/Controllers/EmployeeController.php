@@ -2,51 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\EmployeeUpdateController;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\PersonnelRequest;
-use App\Http\Requests\PersonnelUpdateController;
-use App\Models\Personnel;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
-class PersonnelController extends Controller
+class EmployeeController extends Controller
 {
 
     public function getSignup()
     {
-        return view("personnels.signup");
+        return view("employee.signup");
     }
 
-    public function postSignup(PersonnelRequest $request)
+    public function postSignup(EmployeeRequest $request)
     {
-        $personnels = new Personnel([
+        $Employees = new Employee([
             "full_name" => $request->full_name,
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role" => $request->role,
         ]);
 
-        $personnels->save();
-        Auth::login($personnels);
-        return redirect::route("personnels.dashboard");
+        $Employees->save();
+        Auth::login($Employees);
+        return redirect::route("employee.dashboard");
     }
 
     public function Dashboard()
     {
-        return view("personnels.dashboard");
+        return view("employee.dashboard");
     }
 
     public function getLogout()
     {
         Auth::logout();
-        return view("personnels.signin");
+        return view("employee.signin");
     }
 
     public function getSignin()
     {
-        return view("personnels.signin");
+        return view("employee.signin");
     }
 
     public function postSignin(LoginRequest $request)
@@ -57,7 +57,7 @@ class PersonnelController extends Controller
                 "password" => $request->input("password"),
             ])
         ) {
-            return redirect::route("personnels.dashboard");
+            return redirect::route("employee.dashboard");
         } else {
             return redirect()->back();
         }
@@ -70,10 +70,10 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $personnels = Personnel::withTrashed()->paginate(100);
+        $Employees = Employee::withTrashed()->paginate(100);
 
-        return view("personnels.index", [
-            "personnels" => $personnels,
+        return view("employee.index", [
+            "employees" => $Employees,
         ]);
     }
 
@@ -84,7 +84,7 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        //  return view("personnels.create");
+        //  return view("employee.create");
     }
 
     /**
@@ -93,7 +93,7 @@ class PersonnelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PersonnelRequest $request)
+    public function store(EmployeeRequest $request)
     {
     }
 
@@ -105,8 +105,8 @@ class PersonnelController extends Controller
      */
     public function show($id)
     {
-        $personnels = Personnel::find($id);
-        return view("personnels.show")->with("personnels", $personnels);
+        $Employees = Employee::find($id);
+        return view("employee.show")->with("employees", $Employees);
     }
 
     /**
@@ -117,8 +117,8 @@ class PersonnelController extends Controller
      */
     public function edit($id)
     {
-        $personnels = Personnel::find($id);
-        return view("personnels.edit")->with("personnels", $personnels);
+        $Employees = Employee::find($id);
+        return view("employee.edit")->with("employees", $Employees);
     }
 
     /**
@@ -128,15 +128,15 @@ class PersonnelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PersonnelUpdateController $request, $id)
+    public function update(EmployeeUpdateController $request, $id)
     {
-        $personnels = Personnel::find($id);
-        $personnels->full_name = $request->input("full_name");
-        $personnels->email = $request->input("email");
-        $personnels->password = Hash::make($request->input("password"));
-        $personnels->role = $request->input("role");
-        $personnels->update();
-        return Redirect::to("personnel");
+        $employees = Employee::find($id);
+        $employees->full_name = $request->input("full_name");
+        $employees->email = $request->input("email");
+        $employees->password = Hash::make($request->input("password"));
+        $employees->role = $request->input("role");
+        $employees->update();
+        return Redirect::to("employee");
     }
 
     /**
@@ -147,22 +147,22 @@ class PersonnelController extends Controller
      */
     public function destroy($id)
     {
-        Personnel::destroy($id);
-        return Redirect::to("personnel");
+        Employee::destroy($id);
+        return Redirect::to("employee");
     }
 
     public function restore($id)
     {
-        Personnel::onlyTrashed()
+        Employee::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("personnel.index");
+        return Redirect::route("employee.index");
     }
 
     public function forceDelete($id)
     {
-        $personnels = Personnel::findOrFail($id);
-        $personnels->forceDelete();
-        return Redirect::route("personnel.index");
+        $Employees = Employee::findOrFail($id);
+        $Employees->forceDelete();
+        return Redirect::route("employee.index");
     }
 }

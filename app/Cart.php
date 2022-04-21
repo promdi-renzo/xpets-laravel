@@ -35,7 +35,7 @@ class Cart
 
     public function addAnimal($pets, $id)
     {
-        $addAnimal = ['name' => $pets->animal_name, 'pets' => $pets];
+        $addAnimal = ['name' => $pets->pet_name, 'pets' => $pets];
         if ($this->pets) {
             if (array_key_exists($id, $this->pets)) {
 

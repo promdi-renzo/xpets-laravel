@@ -13,7 +13,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('personnel.email') }}">
+        <form method="POST" action="{{ route('employeee.email') }}">
             @csrf
 
             <div class="row mb-3">

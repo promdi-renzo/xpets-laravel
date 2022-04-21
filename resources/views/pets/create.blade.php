@@ -14,47 +14,38 @@
                 @csrf
                 <div class="block">
                     <div>
-                        <label for="animal_name" class="text-lg">Animal Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="animal_name" name="animal_name"
-                            placeholder="Animal Name" value="{{old('animal_name')}}">
-                        @if($errors->has('animal_name'))
-                        <p class="text-center text-red-500">{{ $errors->first('animal_name') }}</p>
+                        <label for="pet_name" class="text-lg">Pet Name</label>
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="pet_name" name="pet_name"
+                            placeholder="Animal Name" value="{{old('pet_name')}}">
+                        @if($errors->has('pet_name'))
+                        <p class="text-center text-red-500">{{ $errors->first('pet_name') }}</p>
                         @endif
                     </div>
 
                     <div>
-                        <label for="age" class="text-lg">Age</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="age" name="age"
-                            placeholder="Age" value="{{old('age')}}">
-                        @if($errors->has('age'))
-                        <p class="text-center text-red-500">{{ $errors->first('age') }}</p>
+                        <label for="sex" class="text-lg">Sex</label>
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="sex" name="sex"
+                            placeholder="sex" value="{{old('sex')}}">
+                        @if($errors->has('sex'))
+                        <p class="text-center text-red-500">{{ $errors->first('sex') }}</p>
                         @endif
                     </div>
 
                     <div>
-                        <label for="gender" class="text-lg">Gender</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="gender" name="gender"
-                            placeholder="Gender" value="{{old('gender')}}">
-                        @if($errors->has('gender'))
-                        <p class="text-center text-red-500">{{ $errors->first('gender') }}</p>
-                        @endif
-                    </div>
-
-                    <div>
-                        <label for="type" class="text-lg">Type</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="type" name="type"
-                            placeholder="Type of Animal" value="{{old('type')}}">
-                        @if($errors->has('type'))
+                        <label for="classification" class="text-lg">classification</label>
+                        <input classification="text" class="block shadow-5xl p-2 my-2 w-full" id="classification" name="classification"
+                            placeholder="classification of Animal" value="{{old('classification')}}">
+                        @if($errors->has('classification'))
                         <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
                         @endif
                     </div>
 
                     <div>
-                        <label for="images" class="text-lg">Animal Pic</label>
-                        <input type="file" class="" id="images" name="images"
-                            value="{{old('images')}}">
-                        @if($errors->has('images'))
-                        <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
+                        <label for="pictures" class="text-lg">Pictures</label>
+                        <input type="file" class="" id="pictures" name="pictures"
+                            value="{{old('pictures')}}">
+                        @if($errors->has('pictures'))
+                        <p class="text-center text-red-500">{{ $errors->first('pictures') }}</p>
                         @endif
                     </div>
 

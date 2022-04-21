@@ -4,12 +4,12 @@
 <div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
-            Show Personnel
+            Show employeee
         </h1>
     </div>
     <div>
         <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($personnels,['route' => ['personnel.show',$personnels->id],'method'=>'PUT']) }}
+            {{ Form::model($employeees,['route' => ['employeee.show',$employeees->id],'method'=>'PUT']) }}
             <div class="block">
                 <div class="grid grid-cols-2 py-2">
                     <label for="full_name" class="text-lg">Full Name</label>

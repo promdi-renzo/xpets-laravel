@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
-    public const VALIDATION_RULES = [
+    public const VAL = [
         "service_name" => ["required", "min:3"],
         "cost" => ["required", "numeric", "min:3"],
         "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],

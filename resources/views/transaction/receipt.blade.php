@@ -53,7 +53,7 @@
                         </td>
                         <td class="text-center px-6 py-4">
                             <div class="text-sm text-gray-900">
-                                {{ $customer->animal_name }}
+                                {{ $customer->pet_name }}
                             </div>
                         </td>
                         <td class="text-center px-6 py-4">
