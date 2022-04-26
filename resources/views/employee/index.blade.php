@@ -13,7 +13,6 @@
                 <th class="w-screen text-3xl p-3">Update</th>
                 <th class="w-screen text-3xl p-3">Delete</th>
                 <th class="w-screen text-3xl p-3">Restore</th>
-                <th class="w-screen text-3xl p-3">Destroy</th>
             </tr>
         </thead>
 
@@ -78,14 +77,7 @@
                 </a>
             </td>
             @endif
-            <td>
-                <a href="{{ route('employee.forceDelete', $employee->id) }}">
-                    <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                        onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy
-                    </p>
-                </a>
-            </td>
+
         </tr>
         @empty
         <p>No employee Data in the Database</p>

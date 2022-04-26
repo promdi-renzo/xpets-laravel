@@ -20,7 +20,6 @@ class EmployeeFactory extends Factory
             'full_name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('User123!'),
-            'role' => $this->faker->randomElement(['Veterinarian', 'Volunteer', 'Employee']),
         ];
     }
 }
