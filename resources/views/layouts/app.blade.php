@@ -31,9 +31,16 @@
                     <button><a href="{{ URL('service') }}">
                             <h5 class="mr-4">Service</h5>
                         </a></button>
-                    <button><a href={{ URL('employee') }}>
+                    <button><a href="{{ URL('employee') }}">
                             <h5 class="mr-4">employee</h5>
                         </a></button>
+                    <button><a href="{{ URL('consultation') }}">
+                            <h5 class="mr-4">consultation</h5>
+                        </a></button>
+                    <button><a href="{{ URL('comment') }}">
+                            <h5 class="mr-4">comment</h5>
+                        </a></button>
+
 
                 </ul>
 

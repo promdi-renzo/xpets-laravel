@@ -44,7 +44,6 @@
                 @empty
                 <p>No Data in the Database</p>
                 @endforelse
-                @endsection
             </table>
         </div>
     </div>

@@ -48,14 +48,14 @@
             @if($service->deleted_at)
             <td class=" text-center">
                 <a href="#">
-                    <p class="text-center text-2xl bg-black p-2">
+                    <p class="text-center text-lg bg-black text-red-600 p-2 rounded">
                         Update
                     </p>
                 </a>
             </td>
             @else
             <td>
-                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-black p-2">
+                <a href="service/{{ $service->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Update
                 </a>
             </td>
@@ -90,6 +90,14 @@
         <p>No service Data in the Database</p>
         @endforelse
     </table>
+
+    <span class="flex justify-center pt-6">
+        <form action="{{ url('results') }}" type="GET">
+            <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
+            <div class="grid w-full">
+                <button class="text-center text-lg bg-black text-red-600 p-2 rounded">Search</button>
+            </div>
+    </span>
     <div class="pt-6 px-4">{{ $services->links()}}</div>
 </div>
 </div>

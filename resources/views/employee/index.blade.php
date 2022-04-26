@@ -41,14 +41,14 @@
             @if($employee->deleted_at)
             <td class=" text-center">
                 <a href="#">
-                    <p class="text-center text-2xl bg-black p-2">
+                    <p class="text-center text-lg bg-black text-red-600 p-2 rounded">
                         Update
                     </p>
                 </a>
             </td>
             @else
             <td>
-                <a href="employee/{{ $employee->id }}/edit" class="text-center text-2xl bg-black p-2">
+                <a href="employee/{{ $employee->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
                     Update
                 </a>
             </td>

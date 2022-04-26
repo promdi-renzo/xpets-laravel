@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConsultationRequest;
-use App\Models\Animal;
 use App\Models\Consultation;
 use App\Models\Employee;
+use App\Models\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -49,17 +49,18 @@ class ConsultationController extends Controller
     public function results()
     {
         $result = $_GET["result"];
-        $consultations = Consultation::join(
-            "employees",
-            "employees.id",
-            "=",
-            "consultations.employee_id"
-        )
+        $consultations = DB::table("consultations")
             ->join(
                 "pets",
                 "pets.id",
                 "=",
                 "consultations.animal_id"
+            )
+            ->join(
+                "employees",
+                "employees.id",
+                "=",
+                "consultations.employee_id"
             )
             ->select(
                 "employees.full_name",
@@ -74,8 +75,9 @@ class ConsultationController extends Controller
                 "consultations.deleted_at"
             )
 
-            ->where("pets.pet_name", "LIKE", "%" . $result . "%")
+            ->where("pets.pet_name", $result)
             ->get();
+
         return view("consultations.result", [
             "consultations" => $consultations,
         ]);
@@ -126,7 +128,7 @@ class ConsultationController extends Controller
      */
     public function create()
     {
-        $pets = Animal::pluck("pet_name", "id");
+        $pets = Pet::pluck("pet_name", "id");
         $employees = employee::pluck("full_name", "id");
         return view("consultations.create", [
             "pets" => $pets,
@@ -172,7 +174,7 @@ class ConsultationController extends Controller
     public function show($id)
     {
         $consultations = Consultation::find($id);
-        $pets = Animal::pluck("pet_name", "id");
+        $pets = Pet::pluck("pet_name", "id");
         $employees = employee::pluck("full_name", "id");
         return view("consultations.show", [
             "pets" => $pets,
@@ -190,7 +192,7 @@ class ConsultationController extends Controller
     public function edit($id)
     {
         $consultations = Consultation::find($id);
-        $pets = Animal::pluck("pet_name", "id");
+        $pets = Pet::pluck("pet_name", "id");
         $employees = employee::pluck("full_name", "id");
         return view("consultations.edit", [
             "pets" => $pets,

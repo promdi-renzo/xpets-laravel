@@ -110,12 +110,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $Employees = DB::table('employees')
+        $employees = DB::table('employees')
             ->select('employees.id', 'employees.full_name', 'employees.email', 'employees.pictures')
             ->where('employees.id', $id)
             ->get();
 
-        return View::make('employees.show', compact('employees'));
+        return View::make('employee.show', compact('employees'));
     }
 
     /**

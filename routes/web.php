@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\diseaseInjuryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
  */
-
+Route::resource("/comment", "CommentsController")->middleware("auth");
+Route::resource("/employee", "employeeController")->middleware("auth");
 Route::resource("/contact", "ContactController")->middleware("auth");
 Route::get("/contact/restore/{id}", [
     "uses" => "ContactController@restore",
@@ -35,18 +35,6 @@ Route::get("/customer/forceDelete/{id}", [
 Route::get("/customer/restore/{id}", [
     "uses" => "CustomerController@restore",
     "as" => "customer.restore",
-]);
-Route::resource("/diseaseinjury", diseaseInjuryController::class)->middleware(
-    "auth"
-);
-Route::get("/diseaseinjury/restore/{id}", [
-    "uses" => "diseaseInjuryController@restore",
-    "as" => "diseaseinjury.restore",
-]);
-Route::resource("/employee", "employeeController")->middleware("auth");
-Route::get("/diseaseinjury/forceDelete/{id}", [
-    "uses" => "diseaseInjuryController@forceDelete",
-    "as" => "diseaseinjury.forceDelete",
 ]);
 Route::get("/employee/restore/{id}", [
     "uses" => "employeeController@restore",
@@ -74,6 +62,7 @@ Route::get("/consultation/forceDelete/{id}", [
     "uses" => "ConsultationController@forceDelete",
     "as" => "consultation.forceDelete",
 ]);
+Route::get('/results', 'App\Http\Controllers\ConsultationController@results')->name("results")->middleware("auth");
 Route::get('/results', 'App\Http\Controllers\ConsultationController@results')->name("results")->middleware("auth");
 Route::get('/result', 'App\Http\Controllers\CustomerController@result')->name("result")->middleware("auth");
 Route::resource("/transaction", TransactionController::class)->middleware("auth");
