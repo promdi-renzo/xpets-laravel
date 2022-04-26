@@ -26,8 +26,15 @@
 
         @forelse ($services as $service)
         <tr>
-            <td class=" text-center text-3xl">
+            @if($service->deleted_at)
+            <td class="text-center text-3xl">
+                <a href="#">{{$service->id}}</a>
+            </td>
+            @else
+            <td class="text-center text-3xl">
                 <a href="{{route('service.show',$service->id)}}">{{$service->id}}</a>
+            </td>
+            @endif
             </td>
             <td class=" text-center text-3xl">
                 {{ $service->service_name }}
@@ -38,11 +45,21 @@
             <td class="pl-10">
                 <img src="{{ asset('pics/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
+            @if($service->deleted_at)
             <td class=" text-center">
-                <a href="service/{{ $service->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
-                    Update &rarr;
+                <a href="#">
+                    <p class="text-center text-2xl bg-black p-2">
+                        Update
+                    </p>
                 </a>
             </td>
+            @else
+            <td>
+                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-black p-2">
+                    Update
+                </a>
+            </td>
+            @endif
             <td class=" text-center">
                 {!! Form::open(array('route' => array('service.destroy', $service->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">

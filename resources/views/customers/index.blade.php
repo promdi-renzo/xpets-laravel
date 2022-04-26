@@ -25,8 +25,15 @@
     @forelse ($customers as $customer)
 
     <tr>
+      @if($customer->deleted_at)
+      <td class="text-center text-3xl">
+        <a href="#">{{$customer->id}}</a>
+      </td>
+      @else
       <td class="text-center text-3xl">
         <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
+      </td>
+      @endif
       </td>
       <td class="text-center text-3xl">
         {{ $customer->full_name }}
@@ -40,11 +47,21 @@
       <td class=" text-center text-3xl">
         {{ $customer->pet_name }}
       </td>
+      @if($customer->deleted_at)
       <td class=" text-center">
-        <a href="customer/{{ $customer->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+        <a href="#">
+          <p class="text-center text-2xl bg-black p-2">
+            Update
+          </p>
+        </a>
+      </td>
+      @else
+      <td>
+        <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-black p-2">
           Update
         </a>
       </td>
+      @endif
       <td class=" text-center">
         {!! Form::open(array('route' => array('customer.destroy', $customer->id),'method'=>'DELETE')) !!}
         <button type="submit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
@@ -70,15 +87,6 @@
         </a>
       </td>
       @endif
-
-      <td>
-        <a href="{{ route('customer.forceDelete', $customer->id) }}">
-          <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
-            onclick="return confirm('Do you want to delete this data permanently?')">
-            Destroy
-          </p>
-        </a>
-      </td>
     </tr>
     @empty
     <p>No Data in the Database</p>
