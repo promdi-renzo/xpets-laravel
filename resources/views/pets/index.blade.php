@@ -72,14 +72,7 @@
                 </a>
             </td>
             @endif
-            <td>
-                <a href="{{ route('pets.forceDelete', $pet->id) }}">
-                    <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                        onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy
-                    </p>
-                </a>
-            </td>
+
         </tr>
         @empty
         <p>No pets to be seen</p>

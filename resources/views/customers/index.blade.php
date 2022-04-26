@@ -71,14 +71,7 @@
       </td>
       @endif
 
-      <td>
-        <a href="{{ route('customer.forceDelete', $customer->id) }}">
-          <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
-            onclick="return confirm('Do you want to delete this data permanently?')">
-            Destroy
-          </p>
-        </a>
-      </td>
+
     </tr>
     @empty
     <p>No Data in the Database</p>

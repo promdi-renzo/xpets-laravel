@@ -10,7 +10,7 @@
     <nav class="flex justify-between items-center p-5 navbar navbar-expand-md">
         <div class="container">
 
-            <a href="{{ URL('data') }}">
+            <a href="{{ URL('dashboard') }}">
                 <div class="flex font-bold text-2xl bg-white rounded-l-lg">
                     <h1 class="flex-auto p-2 font-bold bg-black border-black text-red-600 rounded-l-lg">XxXxX</h1>
                     <h1 class="flex-auto p-2 text-black bg-slate-100 rounded-r-lg">Pets</h1>
@@ -43,13 +43,13 @@
                     @guest
                     @if (Route::has('employee.signin'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('employee.signin') }}">{{ __('Sign In') }}</a>
+                        <a class="nav-link " href="{{ route('employee.signin') }}">{{ __('Sign In') }}</a>
                     </li>
                     @endif
 
                     @if (Route::has('employee.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('employee.signup') }}">{{ __('Sign Up') }}</a>
+                        <a class="nav-link " href="{{ route('employee.signup') }}">{{ __('Sign Up') }}</a>
                     </li>
                     @endif
                     @else
