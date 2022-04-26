@@ -40,8 +40,12 @@
                     <button><a href="{{ URL('comment') }}">
                             <h5 class="mr-4">comment</h5>
                         </a></button>
-
-
+                    <button><a href="{{ URL('information') }}">
+                            <h5 class="mr-4">store</h5>
+                        </a></button>
+                    <button><a href="{{ URL('shopping-cart') }}">
+                            <h5 class="mr-4">cart</h5>
+                        </a></button>
                 </ul>
 
 

@@ -13,10 +13,10 @@
     <div class="row">
         <div>
             <ul>
-                @foreach($pets as $animal)
+                @foreach($pets as $pet)
                 @foreach($services as $service)
                 <li>
-                    <span class="pr-6">{{ $animal['name'] }}</span>
+                    <span class="pr-6">{{ $pet['pet_name'] }}</span>
                     <span class="pr-6">{{ $service['cost'] }}</span>
                     <div class="btn-group">
                         <a class="btn btn-danger my-2 py-2"

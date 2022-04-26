@@ -168,4 +168,41 @@ class CustomerController extends Controller
         $Customers->forceDelete();
         return Redirect::route("customer.index");
     }
+
+    public function result()
+    {
+        $result = $_GET["result"];
+        $customers = Customer::rightJoin(
+            "pets",
+            "pets.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transactions",
+                "transactions.pets_id",
+                "=",
+                "pets.id"
+            )
+            ->leftjoin(
+                "services",
+                "services.id",
+                "=",
+                "transactions.service_id"
+            )
+            ->select(
+                "customers.full_name",
+                "pets.pet_name",
+                "services.service_name",
+                "services.cost",
+                "transactions.id",
+                "customers.deleted_at"
+            )
+
+            ->where("customers.full_name", "LIKE", "%" . $result . "%")
+            ->get();
+        return view("customers.result", [
+            "customers" => $customers,
+        ]);
+    }
 }

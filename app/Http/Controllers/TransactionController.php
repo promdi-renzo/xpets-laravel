@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-use App\Models\Animal;
 use App\Models\Customer;
-use App\Models\Employee;
+use App\Models\Pet;
 use App\Models\Service;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,13 +70,28 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function getData()
+    public function getInformation()
     {
-        $pets = Animal::all();
+        $pets = pet::join(
+            "customers",
+            "customers.id",
+            "=",
+            "pets.customer_id"
+        )
+            ->select(
+                "customers.full_name",
+                "pets.id",
+                "pets.pet_name",
+                "pets.sex",
+                "pets.pictures",
+                "pets.customer_id",
+                "pets.classification"
+            )
+            ->get();
         $services = Service::all();
-        return view('transaction.data', [
-            'services' => $services,
-            'pets' => $pets,
+        return view("transaction.information", [
+            "services" => $services,
+            "pets" => $pets,
         ]);
     }
 
@@ -101,19 +114,19 @@ class TransactionController extends Controller
         $request->session()->put('cart', $cart);
         Session::put('cart', $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->route("information");
     }
 
-    public function getAnimal(Request $request, $id)
+    public function getPet(Request $request, $id)
     {
-        $pets = Animal::find($id);
+        $pets = Pet::find($id);
         $oldService = Session::has('cart') ? $request->session()->get('cart') : null;
         $cart = new Cart($oldService);
-        $cart->addAnimal($pets, $pets->id);
+        $cart->addPet($pets, $pets->id);
         $request->session()->put('cart', $cart);
         Session::put('cart', $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->route("information");
     }
 
     public function getRemoveItem($id)
@@ -137,41 +150,36 @@ class TransactionController extends Controller
 
     public function postCheckout(Request $request)
     {
-        if (!Session::has('cart')) {
-            return redirect()->route('transaction.index');
+        if (!Session::has("cart")) {
+            return redirect()->route("transaction.index");
         }
-        $oldCart = Session::get('cart');
+        $oldCart = Session::get("cart");
         $cart = new Cart($oldCart);
         try {
             DB::beginTransaction();
-            $transactions = new Transaction();
-            $employees = employee::where('id', Auth::id())->first();
-            $transactions->employee_id = $employees->id;
-            $transactions->date = now();
-            $transactions->save();
-
             foreach ($cart->services as $services) {
                 foreach ($cart->pets as $pets) {
-                    $id = $services['services']['id'];
-                    $animal_id = $pets['pets']['id'];
-                    DB::table('transaction_line')->insert(
-                        [
-                            'service_id' => $id,
-                            'animal_id' => $animal_id,
-                            'transaction_id' => $transactions->id,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]
-                    );
+                    $id = $services["services"]["id"];
+                    $pets_id = $pets["pets"]["id"];
+                    DB::table("transactions")->insert([
+                        "employee_id" => Auth::id(),
+                        "service_id" => $id,
+                        "pets_id" => $pets_id,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                        "date" => now(),
+                    ]);
                 }
             }
         } catch (\Exception$e) {
             DB::rollback();
-            return redirect()->route('transaction.shoppingCart')->with('error', $e->getMessage());
+            return redirect()
+                ->route("transaction.shoppingCart")
+                ->with("error", $e->getMessage());
         }
         DB::commit();
-        Session::forget('cart');
-        return redirect()->route('receipt');
+        Session::forget("cart");
+        return redirect()->route("receipt");
     }
 
     public function getReceipt()
@@ -183,8 +191,8 @@ class TransactionController extends Controller
             "customers.id"
         )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
+                "transactions",
+                "transactions.pets_id",
                 "=",
                 "pets.id"
             )
@@ -192,16 +200,10 @@ class TransactionController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
+                "transactions.service_id"
             )
             ->select(
-                "customers.first_name",
+                "customers.full_name",
                 "pets.pet_name",
                 "services.service_name",
                 "services.cost",
@@ -210,8 +212,9 @@ class TransactionController extends Controller
             )
 
             ->orderBy("transactions.id", "DESC")
-            ->latest('transactions.id')
-            ->take('6')
+        // ->where("pets.id" = "transations.id")
+            ->latest("transactions.id")
+            ->take("3")
             ->get();
         return view("transaction.receipt", [
             "customers" => $customers,

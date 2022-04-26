@@ -13,31 +13,31 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->increments("id");
-            $table->string(column:"date");
-            $table->string(column:"status")->default('Pending');
-            $table->integer(column:"employee_id")->unsigned();
-            $table->integer(column:"pets_id")->unsigned();
+            $table->string(column:"comment");
+            $table->integer(column:"customer_id")->unsigned();
             $table->integer(column:"service_id")->unsigned();
+            $table->integer(column:"animal_id")->unsigned();
+            $table->integer(column:"quantity")->unsigned();
             $table->timestamps();
+            $table->softDeletes();
             $table
-                ->foreign("employee_id")
+                ->foreign("customer_id")
                 ->references("id")
-                ->on("employees")
-                ->onDelete("cascade");
-            $table
-                ->foreign("pets_id")
-                ->references("id")
-                ->on("pets")
+                ->on("customers")
                 ->onDelete("cascade");
             $table
                 ->foreign("service_id")
                 ->references("id")
                 ->on("services")
                 ->onDelete("cascade");
+            $table
+                ->foreign("animal_id")
+                ->references("id")
+                ->on("pets")
+                ->onDelete("cascade");
         });
-
     }
 
     /**
@@ -47,7 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
-        Schema::dropIfExists('transaction_line');
+        Schema::dropIfExists('carts');
     }
 };

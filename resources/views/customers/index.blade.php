@@ -92,7 +92,13 @@
     <p>No Data in the Database</p>
     @endforelse
   </table>
-
+  <span class="flex justify-center pt-6">
+        <form action="{{ url('resultss') }}" type="GET">
+            <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
+            <div class="grid w-full">
+                <button class="text-center text-lg bg-black text-red-600 p-2 rounded">Search</button>
+            </div>
+    </span>
   <div class="pt-6 px-4">{{ $customers->links( )}}</div>
 
 </div>

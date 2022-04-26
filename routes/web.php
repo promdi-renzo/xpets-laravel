@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
  */
+
+Route::resource("/cart", "CartController")->middleware("auth");
 Route::resource("/comment", "CommentsController")->middleware("auth");
 Route::resource("/employee", "employeeController")->middleware("auth");
 Route::resource("/contact", "ContactController")->middleware("auth");
@@ -63,8 +65,7 @@ Route::get("/consultation/forceDelete/{id}", [
     "as" => "consultation.forceDelete",
 ]);
 Route::get('/results', 'App\Http\Controllers\ConsultationController@results')->name("results")->middleware("auth");
-Route::get('/results', 'App\Http\Controllers\ConsultationController@results')->name("results")->middleware("auth");
-Route::get('/result', 'App\Http\Controllers\CustomerController@result')->name("result")->middleware("auth");
+Route::get('/resultss', 'App\Http\Controllers\CustomerController@result')->name("result")->middleware("auth");
 Route::resource("/transaction", TransactionController::class)->middleware("auth");
 Route::get("/", function () {
     return view("welcome");
@@ -80,18 +81,18 @@ Route::get('checkout', [
     'as' => 'checkout',
 ]);
 Route::get('/receipt', 'App\Http\Controllers\TransactionController@getReceipt')->name("receipt")->middleware("auth");
-Route::get('data', [
-    'uses' => 'App\Http\Controllers\TransactionController@getData',
-    'as' => 'data',
+Route::get('information', [
+    'uses' => 'App\Http\Controllers\TransactionController@getInformation',
+    'as' => 'information',
     'middleware' => 'auth',
 ]);
 Route::get('add-to-cart/{id}', [
     'uses' => 'App\Http\Controllers\TransactionController@getAddToCart',
     'as' => 'transaction.addToCart',
 ]);
-Route::get('add-animal/{id}', [
-    'uses' => 'App\Http\Controllers\TransactionController@getAnimal',
-    'as' => 'transaction.addAnimal',
+Route::get('add-pet/{id}', [
+    'uses' => 'App\Http\Controllers\TransactionController@getPet',
+    'as' => 'transaction.addPet',
 ]);
 Route::get('remove/{id}', [
     'uses' => 'App\Http\Controllers\TransactionController@getRemoveItem',
