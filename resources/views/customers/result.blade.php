@@ -15,12 +15,17 @@
         <hr>
         <table class="border-collapse shadow">
             <tr class="text-gray-50 text-center">
+            <th class="w-screen text-4xl">Name</th>
+
                 <th class="w-screen text-4xl">Pet</th>
                 <th class="w-screen text-4xl">Service</th>
                 <th class="w-screen text-4xl">Cost</th>
             </tr>
             @forelse ($customers as $customer)
             <tr>
+            <td class=" text-center text-4xl">
+                    {{ $customer->full_name }}
+                </td>
                 <td class=" text-center text-4xl">
                     {{ $customer->pet_name }}
                 </td>
@@ -32,7 +37,7 @@
                     {{ $customer->cost }}
                 </td>
                 @empty
-                <p class="text-center text-4xl py-8">The Animal You Search Is Not In The Database.</p>
+                <p class="text-center text-4xl py-8">The Customer You Search Is Not In The Database.</p>
                 @endforelse
         </table>
     </div>

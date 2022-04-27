@@ -7,60 +7,42 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)),
-    url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
+<body style="">
     <div class="pt-8 pb-4 px-8">
-        <a href="{{url()->previous()}}" class="text-red-600 p-3 italic bg-black text-lg">
+        <a href="dashboard" class="text-red-600 p-3 italic bg-black text-lg">
             Go Back &rarr;
         </a>
     </div>
     </div>
-    <h1 class="text-center text-white text-3xl pt-4">RECEIPT</h1>
-    <div class="flex justify-center p-4 w-full">
-        @forelse ($customers as $customer)
-        <div class="grid grid-flow-row justify-center border-b border-gray-200 shadow">
-            <table>
-                <thead class="bg-gray-50">
-                    <tr>
 
-                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
-                            Customer
-                        </th>
-                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
-                            Animal
-                        </th>
-                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
-                            Service
-                        </th>
-                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
-                            Cost
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="whitespace-nowrap">
+    <div class="p-4 w-full">
 
-                        <td class="text-center px-6 py-4">
-                            <div class="text-sm text-gray-900">
-                                {{ $customer->full_name }}
-                            </div>
-                        </td>
-                        <td class="text-center px-6 py-4">
-                            <div class="text-sm text-gray-900">
-                                {{ $customer->pet_name }}
-                            </div>
-                        </td>
-                        <td class="text-center px-6 py-4">
-                            {{ $customer->service_name }}
-                        </td>
-                        <td class="text-center px-6 py-4 text-sm text-gray-500">
-                            {{ $customer->cost }}
-                        </td>
-                    </tr>
+        <div class="py-20 h-screen bg-blue-400 px-2 bg-black text-red-600">
+    <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+        <div class="md:flex">
+            <div class="w-full p-3">
+                <div class="border rounded-lg border-dashed py-5 border-3 bg-blue-600">
+                    <div class="p-3">
+                    <h1 class="text-center text-3xl pt-4">THANK YOU FOR SHOPPING</h1>
+                    </div>
+                    <div class="flex w-full mt-3 mb-3"> <span class="border border-dashed w-full border-white"></span> </div>
+                    @forelse ($customers as $customer)
+                    <div class="p-3 space-y-5">
+                        <div class="flex flex-col"> <span class="bg-black text-red-600">Customer: </span> <span class="text-white text-lg font-bold">  {{ $customer->full_name }}</span> </div>
+                        <div class="flex flex-col"> <span class="bg-black text-red-600">Pet: </span> <span class="text-white text-lg font-bold">  {{ $customer->pet_name }}</span> </div>
+                        <div class="flex flex-col"> <span class="bg-black text-red-600">Service: </span> <span class="text-white text-lg font-bold"> {{ $customer->service_name }}</span> </div>
+                        <div class="flex flex-col"> <span class="bg-black text-red-600">Cost: </span> <span class="text-white text-lg font-bold">  {{ $customer->cost }}</span> </div>
+
+                    </div>
                     @empty
                     <p class="text-center text-4xl py-8">Receipt Is Empty</p>
                     @endforelse
-                </tbody>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
             </table>
         </div>
     </div>

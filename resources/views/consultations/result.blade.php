@@ -19,6 +19,8 @@
                 <th class="w-screen text-4xl">Date</th>
                 <th class="w-screen text-4xl">Disease or Injury</th>
                 <th class="w-screen text-4xl">Vet</th>
+                <th class="w-screen text-4xl">Comment</th>
+
             </tr>
             @forelse ($consultations as $consultation)
             <tr>
@@ -33,6 +35,9 @@
                 </td>
                 <td class=" text-center text-4xl">
                     {{ $consultation->full_name }}
+                </td>
+                <td class=" text-center text-4xl">
+                    {{ $consultation->comment }}
                 </td>
                 @empty
                 <p class="text-center text-4xl py-8">The Animal You Search Is Not In The Database.</p>

@@ -29,16 +29,23 @@
                 <th class="w-screen text-3xl p-3">Update</th>
                 <th class="w-screen text-3xl p-3">Delete</th>
                 <th class="w-screen text-3xl p-3">Restore</th>
-                <th class="w-screen text-3xl p-3">Destroy</th>
             </tr>
         </thead>
 
 
         @forelse ($consultations as $consultation)
         <tr>
-            <td class=" text-center text-2xl">
-                <a href="{{route('consultation.show',$consultation->id)}}">{{$consultation->id}}</a>
-            </td>
+        @if($consultation->deleted_at)
+      <td class="text-center text-3xl">
+        <a href="#">{{$consultation->id}}</a>
+      </td>
+      @else
+      <td class="text-center text-3xl">
+        <a href="{{route('consultation.show',$consultation->id)}}">{{$consultation->id}}</a>
+      </td>
+      @endif
+      </td>
+
             <td class=" text-center text-2xl">
                 {{ $consultation->date }}
             </td>
@@ -57,11 +64,21 @@
             <td class=" text-center text-2xl">
                 {{ $consultation->pet_name }}
             </td>
-            <td class="text-center">
-                <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
-                    Update
-                </a>
-            </td>
+            @if($consultation->deleted_at)
+      <td class=" text-center">
+        <a href="#">
+          <p class="text-center text-lg bg-black text-red-600 p-2 rounded">
+            Update
+          </p>
+        </a>
+      </td>
+      @else
+      <td>
+        <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-lg bg-black text-red-600 p-2 rounded">
+          Update
+        </a>
+      </td>
+      @endif
             <td class="text-center">
                 {!! Form::open(array('route' => array('consultation.destroy', $consultation->id),'method'=>'DELETE'))
                 !!}
@@ -87,14 +104,7 @@
                 </a>
             </td>
             @endif
-            <td>
-                <a href="{{ route('consultation.forceDelete', $consultation->id) }}">
-                    <p class="text-center text-lg bg-black text-red-600 p-2 rounded"
-                        onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy
-                    </p>
-                </a>
-            </td>
+
         </tr>
         @empty
         <p>No Consultation Data in the Database</p>

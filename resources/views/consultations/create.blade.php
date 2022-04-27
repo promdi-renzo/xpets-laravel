@@ -26,14 +26,8 @@
                         <label for="disease_injury" class="text-lg">Disease or Injury</label>
                         <select name="disease_injury" id="disease_injury" class="block shadow-5xl p-2 my-2 w-full"
                             value="{{old('disease_injury')}}">
-                            <option>Cataracts</option>
-                            <option>Arthritis</option>
-                            <option>Ear_Infections</option>
-                            <option>Kennel_Cough</option>
-                            <option>Diarrhea</option>
-                            <option>Fleas_and_ticks</option>
-                            <option>Heartworm</option>
-                            <option>Broken_Bones</option>
+
+                            <option>BrokenBones</option>
                             <option>Obesity</option>
                             <option>Cancer</option>
                         </select>
@@ -51,7 +45,7 @@
                     <div>
                         <label for="comment" class="text-lg">Comment</label>
                         <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="comment" name="comment"
-                            placeholder="Comment for Animal" value="{{old('comment')}}">
+                            placeholder="Comment" value="{{old('comment')}}">
                         @if($errors->has('comment'))
                         <p class="text-center text-red-500">{{ $errors->first('comment') }}</p>
                         @endif

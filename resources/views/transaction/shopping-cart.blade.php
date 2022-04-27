@@ -28,23 +28,13 @@
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div>
-            <strong>Total: {{ $totalCost }}</strong>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <a href="{{route ('checkout')}}"> <button type="button" class="btn btn-success">Checkout</button><a>
-        </div>
-    </div>
+
+    <strong>Total: {{ $totalCost }}</strong>
+    <a href="{{route ('checkout')}}"> <button class="p-2 bg-black text-red-600">Checkout</button><a>
+
     @else
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <h2>No Items in Cart!</h2>
-        </div>
-    </div>
+<h2>No Items in Cart!</h2>
+
 </div>
 @endif
 @endsection
